@@ -12,7 +12,7 @@ using Siska.Data.Common.Acc;
 
 namespace Places.Data.Test.Sqlite
 {
-    [TestClass]
+    //[TestClass]
     public class AccCategoryTest : NHUnitTest
     {
         // These properties will be injected based on type
@@ -21,13 +21,13 @@ namespace Places.Data.Test.Sqlite
             get { return Resolve<ICategoryDao>(); }
         }   
 
-        [TestMethod]
+        //[TestMethod]
         public void SanityCheck()
         {
             Assert.IsNotNull(CategoryDao, "area dao is null");
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void GetAllTest()
         {
             // Test the Dao
@@ -42,7 +42,7 @@ namespace Places.Data.Test.Sqlite
             Assert.IsTrue(categoryDt.Count > 0);
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void GetAllByCriteria()
         {
            //List<CriteriaParam> param = new List<CriteriaParam>();
@@ -56,7 +56,7 @@ namespace Places.Data.Test.Sqlite
            //var areaDt = CategoryDao.GetByCriteria(param);
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void GetAllWithPaging()
         {
            //int totalPage = 0;
@@ -67,7 +67,7 @@ namespace Places.Data.Test.Sqlite
            //var page4 = AreaDao.GetAll(3, 2, out totalPage);
         }
 
-        [TestMethod]
+        //[TestMethod]
         public void GetByIdTest()
         {
            //var areaDt = AreaDao.Get(1);
