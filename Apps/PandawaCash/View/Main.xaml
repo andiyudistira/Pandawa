@@ -1,0 +1,21 @@
+﻿<mui:ModernWindow x:Class="PandawaCash.View.Main"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+        Title="Pandawa Cash"
+        ContentSource="/View/Pages/Dashboard.xaml">
+
+    <mui:ModernWindow.TitleLinks>
+        <mui:Link DisplayName="Settings" Source="/View/Pages/Settings.xaml" />
+    </mui:ModernWindow.TitleLinks>
+
+    <mui:ModernWindow.MenuLinkGroups>
+        <mui:LinkGroup DisplayName="Welcome">
+            <mui:LinkGroup.Links>
+                <mui:Link DisplayName="Introduction" Source="/View/Pages/Introduction.xaml" />
+                <mui:Link DisplayName="Dashboard" Source="/View/Pages/Dashboard.xaml" />
+            </mui:LinkGroup.Links>            
+        </mui:LinkGroup>        
+    </mui:ModernWindow.MenuLinkGroups>
+
+</mui:ModernWindow>

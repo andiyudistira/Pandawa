@@ -1,0 +1,18 @@
+
+- This is a System that contain Apps which can be connected to each other
+- This Apps can be add to the System or Remove from the System
+- This Apps must be modular
+- This Apps can talk between Apps
+- This Apps is treat as an Application Object
+- Not all Users can access the Apps
+- Content of the Apps can be considered as the Application Object too
+- Application Object can be anything (The Apps itself, Controls, Library, Component)
+- Each Users have an Authorization for the Application Object whether the Users can Access with Read Only Condition, Editable Condition or can Manage the content of the Apps
+- This System has Administrators
+- Administrator duty is to manage users, roles, groups, menu and Application Object for the whole application
+- Administrator can set the Groups of a Users
+- This System Authentication is based on Groups
+- Administrator can manage the Authentication for Groups; which Menu and Application Object can be accessed by the groups
+- The Apps can be installed separately from the System
+- When the apps first added to the System the default is that the Apps automatically registered to the System and can be accessed by all user
+- The Administrator can manage the settings of an Apps

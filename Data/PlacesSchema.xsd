@@ -1,0 +1,87 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:element name="BaliProvinces">
+       <xs:complexType>
+          <xs:sequence>          	
+          	<xs:element name="Areas" type="Area" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="News" type="News" minOccurs="0" maxOccurs="unbounded"/>             
+          </xs:sequence>
+       </xs:complexType>
+    </xs:element>
+   <xs:complexType name="Area">
+      <xs:sequence>
+         <xs:element name="AreaId" type="xs:integer"></xs:element>
+         <xs:element name="AreaCode" type="xs:string"></xs:element>
+         <xs:element name="Description" type="xs:string"></xs:element>
+         <xs:element name="Places" type="Place" minOccurs="1" maxOccurs="unbounded"></xs:element>
+         <xs:element name="InsertBy" type="xs:string"></xs:element>
+         <xs:element name="InsertDate" type="xs:dateTime"></xs:element>
+         <xs:element name="UpdateBy" type="xs:string"></xs:element>
+         <xs:element name="UpdateDate" type="xs:dateTime"></xs:element>
+         <xs:element name="RecordStatus" type="xs:boolean"></xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Place">
+      <xs:sequence>
+         <xs:element name="PlaceId" type="xs:integer"></xs:element>
+         <xs:element name="PlaceCode" type="xs:string"></xs:element>
+         <xs:element name="Name" type="xs:string"></xs:element>
+         <xs:element name="Position" type="xs:string"></xs:element>
+         <xs:element name="Address" type="xs:string"></xs:element>
+         <xs:element name="Category" type="xs:string"></xs:element>
+         <xs:element name="Contents" type="PlaceContent" minOccurs="1" maxOccurs="unbounded"></xs:element>
+         <xs:element name="Description" type="xs:string"></xs:element>
+         <xs:element name="InsertBy" type="xs:string"></xs:element>
+         <xs:element name="InsertDate" type="xs:dateTime"></xs:element>
+         <xs:element name="UpdateBy" type="xs:string"></xs:element>
+         <xs:element name="UpdateDate" type="xs:dateTime"></xs:element>
+         <xs:element name="RecordStatus" type="xs:boolean"></xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="News">
+      <xs:sequence>
+         <xs:element name="NewsId" type="xs:integer"></xs:element>
+         <xs:element name="NewsCode" type="xs:string"></xs:element>
+         <xs:element name="Title" type="xs:string"></xs:element>
+         <xs:element name="DateSubmited" type="xs:dateTime"></xs:element>
+         <xs:element name="Content" type="xs:string"></xs:element>
+         <xs:element name="Tag" type="xs:string"></xs:element>
+         <xs:element name="Photos" type="Photo" minOccurs="1" maxOccurs="unbounded"></xs:element>
+         <xs:element name="InsertBy" type="xs:string"></xs:element>
+         <xs:element name="InsertDate" type="xs:dateTime"></xs:element>
+         <xs:element name="UpdateBy" type="xs:string"></xs:element>
+         <xs:element name="UpdateDate" type="xs:dateTime"></xs:element>
+         <xs:element name="RecordStatus" type="xs:boolean"></xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="Photo">
+      <xs:sequence>
+         <xs:element name="PhotoId" type="xs:integer"></xs:element>
+         <xs:element name="PhotoCode" type="xs:string"></xs:element>
+         <xs:element name="DateTaken" type="xs:dateTime"></xs:element>
+         <xs:element name="DateSubmited" type="xs:dateTime"></xs:element>
+         <xs:element name="Description" type="xs:string"></xs:element>
+         <xs:element name="Comment" type="xs:string"></xs:element>
+         <xs:element name="InsertBy" type="xs:string"></xs:element>
+         <xs:element name="InsertDate" type="xs:dateTime"></xs:element>
+         <xs:element name="UpdateBy" type="xs:string"></xs:element>
+         <xs:element name="UpdateDate" type="xs:dateTime"></xs:element>
+         <xs:element name="RecordStatus" type="xs:boolean"></xs:element>
+      </xs:sequence>
+   </xs:complexType>
+   <xs:complexType name="PlaceContent">
+      <xs:sequence>
+         <xs:element name="PlaceContentId" type="xs:integer"></xs:element>
+         <xs:element name="PlaceContentCode" type="xs:string"></xs:element>
+         <xs:element name="Name" type="xs:string"></xs:element>
+         <xs:element name="Description" type="xs:string"></xs:element>
+         <xs:element name="Photos" type="Photo" minOccurs="1" maxOccurs="unbounded"></xs:element>
+         <xs:element name="Comment" type="xs:string"></xs:element>
+         <xs:element name="InsertBy" type="xs:string"></xs:element>
+         <xs:element name="InsertDate" type="xs:dateTime"></xs:element>
+         <xs:element name="UpdateBy" type="xs:string"></xs:element>
+         <xs:element name="UpdateDate" type="xs:dateTime"></xs:element>
+         <xs:element name="RecordStatus" type="xs:boolean"></xs:element>
+      </xs:sequence>
+   </xs:complexType>
+</xs:schema>

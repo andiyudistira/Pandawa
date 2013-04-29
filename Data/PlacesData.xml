@@ -1,0 +1,175 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<BaliProvinces xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="PlacesSchema.xsd">
+   <Areas>
+      <AreaCode>001</AreaCode>
+      <Description>Test Dulu</Description>
+      <Places>
+         <PlaceCode>1</PlaceCode>
+         <Name>Test Lagi</Name>
+         <Position>www</Position>
+         <Address>sdfsf</Address>
+         <Category>dfsdfs</Category>
+         <Contents>
+            <PlaceContentCode>223</PlaceContentCode>
+            <Name>asda</Name>
+            <Description>sdfsfdgdf</Description>
+            <Photos>
+               <PhotoCode>12</PhotoCode>
+               <DateTaken>123</DateTaken>
+               <DateSubmited>lfgme</DateSubmited>
+               <Description>sfsdfdf</Description>
+               <Comment>sdfsf</Comment>               
+            </Photos>
+            <Comment>sdfsnfhnos</Comment>
+         </Contents>
+         <Contents>
+            <PlaceContentCode>224</PlaceContentCode>
+            <Name>asda</Name>
+            <Description>sdfsfdgdf</Description>
+            <Photos>
+               <PhotoCode>12</PhotoCode>
+               <DateTaken>123</DateTaken>
+               <DateSubmited>lfgme</DateSubmited>
+               <Description>sfsdfdf</Description>
+               <Comment>sdfsf</Comment>
+            </Photos>
+            <Comment>sdfsnfhnos</Comment>
+         </Contents>
+         <Description>asdsadsa</Description>
+      </Places>
+      <Places>
+         <PlaceCode>2</PlaceCode>
+         <Name>Test Lagi 2</Name>
+         <Position>www 2</Position>
+         <Address>sdfsf 2</Address>
+         <Category>dfsdfs 2</Category>
+         <Contents>
+            <PlaceContentCode>229</PlaceContentCode>
+            <Name>asda</Name>
+            <Description>sdfsfdgdf</Description>
+            <Photos>
+               <PhotoCode>12</PhotoCode>
+               <DateTaken>123</DateTaken>
+               <DateSubmited>lfgme</DateSubmited>
+               <Description>sfsdfdf</Description>
+               <Comment>sdfsf</Comment>
+            </Photos>
+            <Comment>sdfsnfhnos</Comment>
+         </Contents>
+         <Contents>
+            <PlaceContentCode>228</PlaceContentCode>
+            <Name>asda</Name>
+            <Description>sdfsfdgdf</Description>
+            <Photos>
+               <PhotoCode>12</PhotoCode>
+               <DateTaken>123</DateTaken>
+               <DateSubmited>lfgme</DateSubmited>
+               <Description>sfsdfdf</Description>
+               <Comment>sdfsf</Comment>
+            </Photos>
+            <Comment>sdfsnfhnos</Comment>
+         </Contents>
+         <Description>asdsadsa</Description>
+      </Places>
+   </Areas>
+   <Areas>
+      <AreaCode>002</AreaCode>
+      <Description>Test Bujur</Description>
+      <Places>
+         <PlaceCode>1</PlaceCode>
+         <Name>Test Lagi</Name>
+         <Position>www</Position>
+         <Address>sdfsf</Address>
+         <Category>dfsdfs</Category>
+         <Contents>
+            <PlaceContentCode>223</PlaceContentCode>
+            <Name>asda</Name>
+            <Description>sdfsfdgdf</Description>
+            <Photos>
+               <PhotoCode>12</PhotoCode>
+               <DateTaken>123</DateTaken>
+               <DateSubmited>lfgme</DateSubmited>
+               <Description>sfsdfdf</Description>
+               <Comment>sdfsf</Comment>
+            </Photos>
+            <Comment>sdfsnfhnos</Comment>
+         </Contents>
+         <Contents>
+            <PlaceContentCode>224</PlaceContentCode>
+            <Name>asda</Name>
+            <Description>sdfsfdgdf</Description>
+            <Photos>
+               <PhotoCode>12</PhotoCode>
+               <DateTaken>123</DateTaken>
+               <DateSubmited>lfgme</DateSubmited>
+               <Description>sfsdfdf</Description>
+               <Comment>sdfsf</Comment>
+            </Photos>
+            <Comment>sdfsnfhnos</Comment>
+         </Contents>
+         <Description>asdsadsa</Description>
+      </Places>
+      <Places>
+         <PlaceCode>2</PlaceCode>
+         <Name>Test Lagi 2</Name>
+         <Position>www 2</Position>
+         <Address>sdfsf 2</Address>
+         <Category>dfsdfs 2</Category>
+         <Contents>
+            <PlaceContentCode>229</PlaceContentCode>
+            <Name>asda</Name>
+            <Description>sdfsfdgdf</Description>
+            <Photos>
+               <PhotoCode>12</PhotoCode>
+               <DateTaken>123</DateTaken>
+               <DateSubmited>lfgme</DateSubmited>
+               <Description>sfsdfdf</Description>
+               <Comment>sdfsf</Comment>
+            </Photos>
+            <Comment>sdfsnfhnos</Comment>
+         </Contents>
+         <Contents>
+            <PlaceContentCode>228</PlaceContentCode>
+            <Name>asda</Name>
+            <Description>sdfsfdgdf</Description>
+            <Photos>
+               <PhotoCode>12</PhotoCode>
+               <DateTaken>123</DateTaken>
+               <DateSubmited>lfgme</DateSubmited>
+               <Description>sfsdfdf</Description>
+               <Comment>sdfsf</Comment>
+            </Photos>
+            <Comment>sdfsnfhnos</Comment>
+         </Contents>
+         <Description>asdsadsa</Description>
+      </Places>
+   </Areas>
+   <News>
+      <NewsCode>12345</NewsCode>
+      <Title>Gak ada</Title>
+      <DateSubmited>sdfsdf</DateSubmited>
+      <Content>sdljfvbibiwsefisewfow</Content>
+      <Tag>none</Tag>
+      <Photos>
+         <PhotoCode>123</PhotoCode>
+         <DateTaken>sfn</DateTaken>
+         <DateSubmited>dfnsdo</DateSubmited>
+         <Description>My My</Description>
+         <Comment>oldhnfo</Comment>
+      </Photos>
+      <Photos>
+         <PhotoCode>124</PhotoCode>
+         <DateTaken>sfn</DateTaken>
+         <DateSubmited>dfnsdo</DateSubmited>
+         <Description>My My</Description>
+         <Comment>oldhnfo</Comment>
+      </Photos>
+      <Photos>
+         <PhotoCode>125</PhotoCode>
+         <DateTaken>sfn</DateTaken>
+         <DateSubmited>dfnsdo</DateSubmited>
+         <Description>My My</Description>
+         <Comment>oldhnfo</Comment>
+      </Photos>
+   </News>
+</BaliProvinces>
