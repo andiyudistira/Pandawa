@@ -37,6 +37,8 @@ namespace Places.Data.Test.Sqlite
 
             // Test the 2nd
             Assert.IsNotNull(categoryDt);
+
+            // Test branch
             Assert.IsTrue(categoryDt.Count > 0);
         }
 
