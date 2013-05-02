@@ -19,7 +19,12 @@ namespace Places.Data.Test.Sqlite
         private ICategoryDao CategoryDao
         {
             get { return Resolve<ICategoryDao>(); }
-        }   
+        }
+
+        private IAccountDao AccountDao
+        {
+            get { return Resolve<IAccountDao>(); }
+        }  
 
         //[TestMethod]
         public void SanityCheck()
@@ -30,6 +35,8 @@ namespace Places.Data.Test.Sqlite
         //[TestMethod]
         public void GetAllTest()
         {
+            var accountDt = AccountDao.GetAll();
+
             // Test the Dao
             var categoryDt = CategoryDao.GetAll();
 

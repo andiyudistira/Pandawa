@@ -40,9 +40,14 @@ namespace Places.Data.Test
 
         }
 
-        public T Resolve<T>()
+        protected T Resolve<T>()
         {
             return container.Resolve<T>();
+        }
+
+        protected void Resolve(object _object)
+        {
+            container.Release(_object);
         }
     }
 }

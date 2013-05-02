@@ -1,6 +1,7 @@
 using System;
 using System.Text;
 using System.Collections.Generic;
+using Iesi.Collections.Generic;
 
 
 namespace Siska.Data.Model.Acc {
@@ -15,5 +16,6 @@ namespace Siska.Data.Model.Acc {
         public System.Nullable<int> UpdateBy { get; set; }
         public System.Nullable<System.DateTime> UpdateDate { get; set; }
         public bool RecordStatus { get; set; }
+        public IList<AccCategory> Categories { get; set; }
     }
 }

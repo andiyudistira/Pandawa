@@ -19,6 +19,7 @@ namespace Siska.Data.Model.Acc {
 			Map(x => x.InsertDate).Column("InsertDate").Not.Nullable().Length(8);
 			Map(x => x.UpdateBy).Column("UpdateBy").Length(8);
 			Map(x => x.UpdateDate).Column("UpdateDate").Length(8);
+            HasMany(x => x.TransactionDetails).KeyColumns.Add("TransactionId").AsList().Inverse();
         }
     }
 }

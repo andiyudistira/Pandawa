@@ -14,5 +14,6 @@ namespace Siska.Data.Model.Acc {
         public System.DateTime InsertDate { get; set; }
         public System.Nullable<int> UpdateBy { get; set; }
         public System.Nullable<System.DateTime> UpdateDate { get; set; }
+        public IList<AccTransactionDetail> TransactionDetails { get; set; }
     }
 }
