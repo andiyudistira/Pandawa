@@ -35,6 +35,54 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Data", "Data", "{388C22A5-2
 		Data\Siska.1.0.65.db = Data\Siska.1.0.65.db
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{5E75E69F-3E62-498B-8503-28C676770CFD}"
+	ProjectSection(SolutionItems) = preProject
+		lib\AutoMapper.dll = lib\AutoMapper.dll
+		lib\Castle.Core.dll = lib\Castle.Core.dll
+		lib\Castle.Facilities.AutoTx.dll = lib\Castle.Facilities.AutoTx.dll
+		lib\Castle.Facilities.EventWiring.dll = lib\Castle.Facilities.EventWiring.dll
+		lib\Castle.Facilities.FactorySupport.dll = lib\Castle.Facilities.FactorySupport.dll
+		lib\Castle.Facilities.Logging.dll = lib\Castle.Facilities.Logging.dll
+		lib\Castle.Facilities.NHibernate.dll = lib\Castle.Facilities.NHibernate.dll
+		lib\Castle.Facilities.Remoting.dll = lib\Castle.Facilities.Remoting.dll
+		lib\Castle.Facilities.Synchronize.dll = lib\Castle.Facilities.Synchronize.dll
+		lib\Castle.Services.Logging.Log4netIntegration.dll = lib\Castle.Services.Logging.Log4netIntegration.dll
+		lib\Castle.Services.Logging.NLogIntegration.dll = lib\Castle.Services.Logging.NLogIntegration.dll
+		lib\Castle.Transactions.dll = lib\Castle.Transactions.dll
+		lib\Castle.Windsor.dll = lib\Castle.Windsor.dll
+		lib\Esent.Interop.dll = lib\Esent.Interop.dll
+		lib\FirstFloor.ModernUI.dll = lib\FirstFloor.ModernUI.dll
+		lib\FluentNHibernate.dll = lib\FluentNHibernate.dll
+		lib\Iesi.Collections.dll = lib\Iesi.Collections.dll
+		lib\log4net.dll = lib\log4net.dll
+		lib\Microsoft.Windows.Shell.dll = lib\Microsoft.Windows.Shell.dll
+		lib\NHibernate.ByteCode.Castle.dll = lib\NHibernate.ByteCode.Castle.dll
+		lib\NHibernate.dll = lib\NHibernate.dll
+		lib\NLog.dll = lib\NLog.dll
+		lib\Rhino.PersistentHashTable.dll = lib\Rhino.PersistentHashTable.dll
+		lib\Rhino.Queues.dll = lib\Rhino.Queues.dll
+		lib\Rhino.ServiceBus.Castle.dll = lib\Rhino.ServiceBus.Castle.dll
+		lib\Rhino.ServiceBus.dll = lib\Rhino.ServiceBus.dll
+		lib\System.Data.SQLite.dll = lib\System.Data.SQLite.dll
+		lib\System.Data.SQLite.Linq.dll = lib\System.Data.SQLite.Linq.dll
+		lib\Wintellect.Threading.dll = lib\Wintellect.Threading.dll
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MvvmLight", "MvvmLight", "{6D9E1D84-3FD2-4E45-8C1B-BD017C6C2278}"
+	ProjectSection(SolutionItems) = preProject
+		lib\MvvmLight\GalaSoft.MvvmLight.Extras.WPF45.dll = lib\MvvmLight\GalaSoft.MvvmLight.Extras.WPF45.dll
+		lib\MvvmLight\GalaSoft.MvvmLight.Extras.WPF45.xml = lib\MvvmLight\GalaSoft.MvvmLight.Extras.WPF45.xml
+		lib\MvvmLight\GalaSoft.MvvmLight.WPF45.dll = lib\MvvmLight\GalaSoft.MvvmLight.WPF45.dll
+		lib\MvvmLight\GalaSoft.MvvmLight.WPF45.xml = lib\MvvmLight\GalaSoft.MvvmLight.WPF45.xml
+		lib\MvvmLight\System.Windows.Interactivity.dll = lib\MvvmLight\System.Windows.Interactivity.dll
+		lib\MvvmLight\System.Windows.Interactivity.xml = lib\MvvmLight\System.Windows.Interactivity.xml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Web", "Web", "{65E8CF62-514B-4BB6-904D-DB4E824D1DE4}"
+	ProjectSection(SolutionItems) = preProject
+		lib\Web\Castle.Windsor.dll = lib\Web\Castle.Windsor.dll
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Siska.vsmdi
@@ -137,5 +185,7 @@ Global
 		{BE663D97-CE71-4A1D-8D5D-AE4E11D41004} = {68F03E2D-FB69-4B51-B9B6-FD95749FA179}
 		{916953BA-A3F3-4938-BAFC-22FB23E8856C} = {924D09FD-06EA-4AA1-8BF3-E64223198D62}
 		{67A25085-A880-438E-8B4F-8C73C4B68FD9} = {9E6DDAE8-6EC7-4EE5-9611-95034E8D9627}
+		{6D9E1D84-3FD2-4E45-8C1B-BD017C6C2278} = {5E75E69F-3E62-498B-8503-28C676770CFD}
+		{65E8CF62-514B-4BB6-904D-DB4E824D1DE4} = {5E75E69F-3E62-498B-8503-28C676770CFD}
 	EndGlobalSection
 EndGlobal
