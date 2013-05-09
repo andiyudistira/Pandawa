@@ -1,7 +1,7 @@
 ﻿using Castle.Transactions;
 using NHibernate;
 using Siska.Core;
-using Siska.Data.Common.Acc;
+using Siska.Data.Dao;
 using Siska.Data.Model.Acc;
 using System;
 using System.Collections.Generic;

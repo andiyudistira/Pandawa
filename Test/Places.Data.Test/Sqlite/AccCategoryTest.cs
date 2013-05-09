@@ -8,7 +8,7 @@ using NHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using Siska.Core;
 using Siska.Data.NHibernate.Dao;
-using Siska.Data.Common.Acc;
+using Siska.Data.Dao;
 
 namespace Places.Data.Test.Sqlite
 {
@@ -43,6 +43,7 @@ namespace Places.Data.Test.Sqlite
             var categoryDt2 = CategoryDao.GetAll();
 
             // Test the 2nd
+
             Assert.IsNotNull(categoryDt);
 
             // Test branch

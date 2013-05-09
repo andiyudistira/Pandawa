@@ -41,7 +41,7 @@ namespace PandawaCash.ViewModel
 
         void TestCommand(string a)
         {
-            string test;
+            //string test;
         }
     }
 }

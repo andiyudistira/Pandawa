@@ -124,17 +124,13 @@
       <Project>{42DE2E81-81F4-4792-BB4D-2924F935F659}</Project>
       <Name>Siska.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Backend\Siska.Data.Common\Siska.Data.Common.csproj">
-      <Project>{0E63F3A8-6232-4D44-B894-9027407A1C07}</Project>
-      <Name>Siska.Data.Common</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Backend\Siska.Data.Model\Siska.Data.Model.csproj">
-      <Project>{353CF4A6-D119-4648-A31C-BDE57C35F953}</Project>
-      <Name>Siska.Data.Model</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Backend\Siska.Data.NHibernate\Siska.Data.NHibernate.csproj">
       <Project>{1069B9D4-EF88-4D2F-9724-57601B2ECBAB}</Project>
       <Name>Siska.Data.NHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Backend\Siska.Data\Siska.Data.csproj">
+      <Project>{5f8b96fa-7af8-49dc-8cb6-005c6781273a}</Project>
+      <Name>Siska.Data</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
