@@ -12,7 +12,7 @@ using Siska.Data.Common.Acc;
 
 namespace Places.Data.Test.Sqlite
 {
-    //[TestClass]
+    [TestClass]
     public class AccCategoryTest : NHUnitTest
     {
         // These properties will be injected based on type
@@ -32,7 +32,7 @@ namespace Places.Data.Test.Sqlite
             Assert.IsNotNull(CategoryDao, "area dao is null");
         }
 
-        //[TestMethod]
+        [TestMethod]
         public void GetAllTest()
         {
             var accountDt = AccountDao.GetAll();
