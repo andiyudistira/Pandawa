@@ -29,7 +29,7 @@ namespace Siska.Data.NHibernate.Dao
 
             using (var s = getSession())
             {
-                ICriteria criteria = s.CreateCriteria<T>();
+                ICriteria criteria = getSession().CreateCriteria<T>();
                 result = criteria.List<T>();
             }
 

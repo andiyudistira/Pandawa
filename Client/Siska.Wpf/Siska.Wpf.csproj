@@ -82,6 +82,7 @@
     <Compile Include="ViewModelResolver.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="WindsorServiceInstaller.cs" />
     <Compile Include="WindsorViewsInstaller.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

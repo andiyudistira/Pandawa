@@ -19,7 +19,8 @@ namespace Places.Data.Test
 
         public NHUnitTest()
         {
-            
+            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
+
             container = new WindsorContainer();
 
             container
@@ -38,6 +39,7 @@ namespace Places.Data.Test
                                   .LifestyleSingleton()
                                 );
 
+            
         }
 
         protected T Resolve<T>()

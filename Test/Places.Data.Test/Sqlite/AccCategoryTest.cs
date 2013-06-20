@@ -36,6 +36,7 @@ namespace Places.Data.Test.Sqlite
         public void GetAllTest()
         {
             var accountDt = AccountDao.GetAll();
+            var aiusd = accountDt[0].Categories;
 
             // Test the Dao
             var categoryDt = CategoryDao.GetAll();

@@ -22,11 +22,19 @@ namespace Siska.Data.NHibernate.Dao.Acc
         {
             return getSession().Get<AccAccount>(id);
         }
-
+        
         [Transaction]
         public IList<AccAccount> GetAll()
         {
-            return GetAll<AccAccount>();
+            IList<AccAccount> result;
+
+            using (var s = getSession())
+            {
+                ICriteria criteria = getSession().CreateCriteria<AccAccount>().SetFetchMode("Categories", FetchMode.Lazy);
+                result = criteria.List<AccAccount>();
+            }
+
+            return result;
         }
 
         [Transaction]

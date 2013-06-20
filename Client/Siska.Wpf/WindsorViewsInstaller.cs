@@ -17,12 +17,6 @@ namespace Siska.Wpf
                 Classes.FromAssemblyNamed(System.Configuration.ConfigurationManager.AppSettings["AssemblyName"].ToString())
                     .BasedOn<ViewModelBase>()
                     .LifestyleTransient());
-
-            //container
-            //    .Register(
-            //        AllTypes.FromThisAssembly()
-            //        .BasedOn<ViewModelBase>()
-            //        .LifestyleTransient());
         }
     }
 }

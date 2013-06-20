@@ -20,7 +20,7 @@ namespace Siska.Data.Model.Acc {
 			Map(x => x.UpdateBy).Column("UpdateBy").Length(8);
 			Map(x => x.UpdateDate).Column("UpdateDate").Length(8);
 			Map(x => x.RecordStatus).Column("RecordStatus").Not.Nullable().Length(1);
-            HasMany(x => x.Categories).KeyColumns.Add("CategoryId").AsList().Inverse();
+            HasMany(x => x.Categories).KeyColumns.Add("AccountId").AsBag().Inverse();
         }
     }
 }

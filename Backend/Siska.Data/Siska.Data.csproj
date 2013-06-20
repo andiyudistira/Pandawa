@@ -49,9 +49,14 @@
     <Compile Include="Model\Acc\AccCategory.cs" />
     <Compile Include="Model\Acc\AccTransaction.cs" />
     <Compile Include="Model\Acc\AccTransactionDetail.cs" />
+    <Compile Include="Model\Pos\Role.cs" />
+    <Compile Include="Model\Pos\User.cs" />
+    <Compile Include="Model\Pos\UserSession.cs" />
+    <Compile Include="Model\Pos\UsersInRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Dao\Pos\" />
     <Folder Include="Validator\" />
   </ItemGroup>
   <ItemGroup>
