@@ -70,5 +70,11 @@ namespace Siska.Data.NHibernate.Dao.Acc
         {
             getSession().Delete(entity);
         }
+
+
+        public IList<AccCategory> GetByCriteriaWithPaging(int page, int maxRow, out int numberOfPages, List<CriteriaParam> Param)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

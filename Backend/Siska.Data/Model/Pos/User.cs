@@ -1,7 +1,7 @@
 using System;
-using System.Text;
 using System.Collections.Generic;
-
+using System.Text;
+using Iesi.Collections.Generic;
 
 namespace Siska.Data.Model.Pos {
     
@@ -11,7 +11,13 @@ namespace Siska.Data.Model.Pos {
         public string Password { get; set; }
         public bool RecordStatus { get; set; }
 
-        public IList<UsersInRole> UsersInRoles { get; set; }
-        public IList<UserSession> UserSessions { get; set; }
+        public ICollection<Role> Roles { get; set; }
+        public ICollection<UserSession> UserSessions { get; set; }
+
+        public User()
+        {
+            Roles = new HashedSet<Role>();
+            UserSessions = new HashedSet<UserSession>();
+        }
     }
 }

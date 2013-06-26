@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 using System.Collections.Generic;
-
+using Iesi.Collections.Generic;
 
 namespace Siska.Data.Model.Pos {
     
@@ -14,6 +14,11 @@ namespace Siska.Data.Model.Pos {
         public System.Nullable<System.DateTime> UpdateDate { get; set; }
         public bool RecordStatus { get; set; }
 
-        public IList<UsersInRole> UsersInRoles { get; set; }
+        public ICollection<User> Users { get; set; }
+
+        public Role()
+        {
+            Users = new HashedSet<User>();
+        }
     }
 }

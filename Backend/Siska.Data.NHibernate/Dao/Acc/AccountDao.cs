@@ -1,12 +1,10 @@
-﻿using Castle.Transactions;
+﻿using System;
+using System.Collections.Generic;
+using Castle.Transactions;
 using NHibernate;
 using Siska.Core;
 using Siska.Data.Dao;
 using Siska.Data.Model.Acc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 
 namespace Siska.Data.NHibernate.Dao.Acc
 {
@@ -77,6 +75,12 @@ namespace Siska.Data.NHibernate.Dao.Acc
         public void Delete(AccAccount entity)
         {
             getSession().Delete(entity);
+        }
+
+
+        public IList<AccAccount> GetByCriteriaWithPaging(int page, int maxRow, out int numberOfPages, List<CriteriaParam> Param)
+        {
+            throw new NotImplementedException();
         }
     }
 }

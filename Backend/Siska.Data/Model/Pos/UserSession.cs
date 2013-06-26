@@ -6,7 +6,8 @@ using System.Collections.Generic;
 namespace Siska.Data.Model.Pos {
     
     public class UserSession {
-        public string SessionId { get; set; }
+        public int UserSessionId { get; set; }
+        public Guid SessionId { get; set; }
         public User User { get; set; }
         public DateTime LoginDate { get; set; }
         public System.Nullable<System.DateTime> LogOffDate { get; set; }

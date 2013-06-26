@@ -34,5 +34,12 @@ namespace Siska.Data.Dao
         /// <param name="criteria">criteria for selection in string</param>
         /// <returns>Matching entities</returns>
         IList<TEntity> GetByCriteria(List<CriteriaParam> Param);
+
+        /// <summary>
+        /// Return entities matches a string criteria with paging.
+        /// </summary>
+        /// <param name="criteria">criteria for selection in string</param>
+        /// <returns>Matching entities</returns>
+        IList<TEntity> GetByCriteriaWithPaging(int page, int maxRow, out int numberOfPages, List<CriteriaParam> Param);
     }
 }

@@ -14,8 +14,8 @@ namespace Siska.Data.Model.Pos
             Table("UsersInRoles");
 			LazyLoad();
             Id(x => x.UsersInRoleId).GeneratedBy.Identity().Column("UsersInRoleId");
-            References(x => x.User, "UserId").Fetch.Join();
-            References(x => x.Role, "RoleId").Fetch.Join();
+            References(x => x.User, "UserId");
+            References(x => x.Role, "RoleId");
         }
     }
 }

@@ -73,6 +73,39 @@ namespace Siska.Data.NHibernate.Dao
             return result;
         }
 
+        protected ICriteria CreateCriteriaOnly<T>(List<CriteriaParam> itemParams) where T : class
+        {
+            using (var s = getSession())
+            {
+                ICriteria criteria = s.CreateCriteria<T>();
+
+                foreach (CriteriaParam item in itemParams)
+                {
+                    if ((!item.Operator.Equals(Operators.And)) && (!item.Operator.Equals(Operators.Or)))
+                    {
+                        criteria.Add(CreateCriterion(item));
+                    }
+                    else
+                    {
+                        if (item.Operator.Equals(Operators.Or))
+                        {
+                            ICriterion leftCriterion = CreateCriterion(item.Left);
+                            ICriterion rightCriterion = CreateCriterion(item.Right);
+                            criteria.Add(Restrictions.Or(leftCriterion, rightCriterion));
+                        }
+                        else if (item.Operator.Equals(Operators.And))
+                        {
+                            ICriterion leftCriterion = CreateCriterion(item.Left);
+                            ICriterion rightCriterion = CreateCriterion(item.Right);
+                            criteria.Add(Restrictions.And(leftCriterion, rightCriterion));
+                        }
+                    }
+                }
+
+                return criteria;
+            }
+        }
+
         protected ICriterion CreateCriterion(CriteriaParam item)
         {
            ICriterion criterion = null;

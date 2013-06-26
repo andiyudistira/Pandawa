@@ -96,6 +96,9 @@
     <Compile Include="Dao\HibernateDao.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
+    <Compile Include="Dao\Pos\RoleDao.cs" />
+    <Compile Include="Dao\Pos\UserDao.cs" />
+    <Compile Include="Dao\Pos\UserSessionDao.cs" />
     <Compile Include="Mappings\Acc\AccAccountMap.cs" />
     <Compile Include="Mappings\Acc\AccCategoryMap.cs" />
     <Compile Include="Mappings\Acc\AccTransactionDetailMap.cs" />

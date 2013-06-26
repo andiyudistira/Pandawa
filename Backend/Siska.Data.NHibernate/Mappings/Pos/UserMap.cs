@@ -10,14 +10,22 @@ namespace Siska.Data.Model.Pos {
         
         public UserMap() {
 			Table("Users");
-			LazyLoad();
+            LazyLoad();
 			Id(x => x.UserId).GeneratedBy.Identity().Column("UserId");
 			Map(x => x.UserName).Column("UserName").Not.Nullable().Length(2147483647);
 			Map(x => x.Password).Column("Password").Not.Nullable().Length(2147483647);
 			Map(x => x.RecordStatus).Column("RecordStatus").Not.Nullable().Length(1);
 
-            HasMany(x => x.UserSessions).KeyColumns.Add("SessionId").AsList().Inverse();
-            HasMany(x => x.UsersInRoles).KeyColumns.Add("UsersInRoleId").AsList().Inverse();
+            HasMany(x => x.UserSessions).KeyColumns.Add("UserId").AsSet().Inverse();
+
+            HasManyToMany<Role>(x => x.Roles).Table("UsersInRoles")
+                                    .ParentKeyColumn("UserID")
+                                    .ChildKeyColumn("RoleID")
+                                    .AsSet()
+                                    .Inverse()
+                                    .LazyLoad();
+
+            //HasMany(x => x.UsersInRoles).KeyColumns.Add("UserId").AsSet().Inverse();
         }
     }
 }
