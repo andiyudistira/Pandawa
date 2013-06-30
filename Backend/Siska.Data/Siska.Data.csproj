@@ -30,11 +30,14 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Castle.Core">
+      <HintPath>..\..\lib\Castle.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\..\lib\Castle.Windsor.dll</HintPath>
+    </Reference>
     <Reference Include="Iesi.Collections">
       <HintPath>..\..\lib\Iesi.Collections.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate">
-      <HintPath>..\..\lib\NHibernate.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -45,6 +48,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DaoInterceptor.cs" />
     <Compile Include="Dao\Acc\IAccountDao.cs" />
     <Compile Include="Dao\Acc\ICategoryDao.cs" />
     <Compile Include="Dao\IDao.cs" />
@@ -54,6 +58,9 @@
     <Compile Include="Dao\Pos\IRoleDao.cs" />
     <Compile Include="Dao\Pos\IUserDao.cs" />
     <Compile Include="Dao\Pos\IUserSessionDao.cs" />
+    <Compile Include="Dto\Pos\RoleDto.cs" />
+    <Compile Include="Dto\Pos\UserDto.cs" />
+    <Compile Include="Dto\Pos\UserSessionDto.cs" />
     <Compile Include="Model\Acc\AccAccount.cs" />
     <Compile Include="Model\Acc\AccCategory.cs" />
     <Compile Include="Model\Acc\AccTransaction.cs" />
@@ -64,9 +71,7 @@
     <Compile Include="Model\Pos\UsersInRole.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Validator\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <ProjectReference Include="..\Siska.Core\Siska.Core.csproj">
       <Project>{42de2e81-81f4-4792-bb4d-2924f935f659}</Project>

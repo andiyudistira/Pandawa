@@ -37,7 +37,7 @@ namespace Siska.Core
 
       public CriteriaParam Left { get; set; }
       public CriteriaParam Right { get; set; }
-
+       
       public object ValueLo { get; set; }
       public object ValueHigh { get; set; }
    }

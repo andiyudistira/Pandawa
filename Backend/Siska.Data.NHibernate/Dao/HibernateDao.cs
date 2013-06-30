@@ -19,7 +19,7 @@ namespace Siska.Data.NHibernate.Dao
         protected readonly Func<ISession> getSession;
 
         public HibernateDao(Func<ISession> getSession)
-		{
+		{            
 			this.getSession = getSession;
 		}
 

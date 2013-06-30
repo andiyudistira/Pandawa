@@ -13,7 +13,7 @@ namespace Siska.Data.Model.Pos {
 			Table("UserSession");
             LazyLoad();
             Id(x => x.UserSessionId).GeneratedBy.Identity().Column("UserSessionId");            
-            References(x => x.User, "UserId");
+            References(x => x.User, "UserId").Fetch.Join();
             Map(x => x.SessionId).Column("SessionId");
 			Map(x => x.LoginDate).Column("LoginDate").Length(8);
 			Map(x => x.LogOffDate).Column("LogOffDate").Length(8);

@@ -23,8 +23,8 @@ namespace Siska.Data.Model.Pos {
                                         .AsSet()      
                                         .LazyLoad();
 
-            References(x => x.InsertBy, "InsertBy");
-            References(x => x.UpdateBy, "UpdateBy");
+            References(x => x.InsertBy, "InsertBy").Fetch.Join();
+            References(x => x.UpdateBy, "UpdateBy").Fetch.Join();
         }
     }
 }

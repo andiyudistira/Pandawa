@@ -21,22 +21,13 @@ namespace Siska.Data.NHibernate.Dao.Pos
         {
             return getSession().Get<UserSession>(id);
         }
-        
+
         [Transaction]
         public IList<UserSession> GetAll()
         {
-            IList<UserSession> result;
+            ICriteria criteria = getSession().CreateCriteria<UserSession>();
 
-            using (var s = getSession())
-            {
-                ICriteria criteria = getSession().CreateCriteria<UserSession>()
-                    .SetFetchMode("User", FetchMode.Lazy)
-                    .SetFetchMode("User.UsersInRoles", FetchMode.Lazy)
-                    .SetFetchMode("User.UserSessions", FetchMode.Lazy);
-                result = criteria.List<UserSession>();
-            }
-
-            return result;
+            return criteria.List<UserSession>();
         }
 
         [Transaction]
@@ -48,7 +39,7 @@ namespace Siska.Data.NHibernate.Dao.Pos
         [Transaction]
         public string Add(UserSession entity)
         {
-            return (string)getSession().Save(entity);
+            return (string)getSession().Save(entity).ToString();
         }
 
         [Transaction]
@@ -62,10 +53,7 @@ namespace Siska.Data.NHibernate.Dao.Pos
         {
             numberOfPages = 0;
 
-            ICriteria criteria = getSession().CreateCriteria<UserSession>()
-                    .SetFetchMode("User", FetchMode.Lazy)
-                    .SetFetchMode("User.UsersInRoles", FetchMode.Lazy)
-                    .SetFetchMode("User.UserSessions", FetchMode.Lazy);
+            ICriteria criteria = getSession().CreateCriteria<UserSession>();
             criteria.SetFirstResult(page * maxRow);
             criteria.SetMaxResults(maxRow);
 
@@ -82,12 +70,6 @@ namespace Siska.Data.NHibernate.Dao.Pos
         public IList<UserSession> GetByCriteriaWithPaging(int page, int maxRow, out int numberOfPages, List<CriteriaParam> Param)
         {
             numberOfPages = 0;
-
-            Hashtable fetchMode = new Hashtable();
-
-            fetchMode.Add("User", FetchMode.Lazy);
-            fetchMode.Add("User.UsersInRoles", FetchMode.Lazy);
-            fetchMode.Add("User.UserSessions", FetchMode.Lazy);
 
             ICriteria criteria = CreateCriteriaOnly<UserSession>(Param);
             criteria.SetFirstResult(page * maxRow);

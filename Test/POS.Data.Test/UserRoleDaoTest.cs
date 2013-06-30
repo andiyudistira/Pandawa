@@ -23,6 +23,10 @@ namespace POS.Data.Test
             get { return Resolve<IRoleDao>(); }
         }
 
+        private IUserSessionDao UserSessionDao
+        {
+            get { return Resolve<IUserSessionDao>(); }
+        }
 
         [TestMethod]
         public void SanityCheck()
@@ -70,6 +74,29 @@ namespace POS.Data.Test
             var result = UserDao.Add(userToBeSaved);
             RoleDao.Update(roleList[0]);
             RoleDao.Update(roleList[1]);
+        }
+
+        [TestMethod]
+        public void AddUserSessionTest()
+        {
+            List<CriteriaParam> param = new List<CriteriaParam>();
+
+            param.Add(new CriteriaParam() { FieldName = "UserName", Operator = Operators.Equals, Value = "andi" });
+            param.Add(new CriteriaParam() { FieldName = "Password", Operator = Operators.Equals, Value = "andi" });
+            param.Add(new CriteriaParam() { FieldName = "RecordStatus", Operator = Operators.Equals, Value = true });
+
+            User user = UserDao.GetByCriteria(param).FirstOrDefault();
+
+            UserSession userSession = new UserSession();
+
+            userSession.LoginDate = DateTime.Now;
+            userSession.LoginStatus = 1;
+            userSession.SessionId = Guid.NewGuid();
+            userSession.User = user;
+
+            user.UserSessions.Add(userSession);
+
+            UserSessionDao.Add(userSession);
         }
     }
 }

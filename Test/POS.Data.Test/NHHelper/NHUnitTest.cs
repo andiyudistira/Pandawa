@@ -8,6 +8,9 @@ using Siska.Data.NHibernate;
 using Castle.Facilities.NHibernate;
 using NLog;
 using Castle.Facilities.AutoTx;
+using Castle.Facilities.Logging;
+using Siska.Data;
+using Castle.Core;
 
 namespace POS.Data.Test
 {
@@ -22,6 +25,9 @@ namespace POS.Data.Test
             HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
 
             container = new WindsorContainer();
+            
+            container.AddFacility<LoggingFacility>(f => f.LogUsing(LoggerImplementation.Log4net).WithAppConfig());
+            container.Register(Component.For<DaoInterceptor>());
 
             container
                 .AddFacility<AutoTxFacility>()
@@ -37,9 +43,10 @@ namespace POS.Data.Test
                                                 (c.Name.Contains("Dao")) && c.Assembly.GetName().Name != "Siska.Data.NDatabase")
                                   .WithService.DefaultInterfaces()
                                   .LifestyleSingleton()
+                                  .Configure(delegate(ComponentRegistration c) { var x = c.Interceptors(InterceptorReference.ForType<DaoInterceptor>()).Anywhere; })
                                 );
 
-            
+            log4net.Config.XmlConfigurator.Configure();
         }
 
         protected T Resolve<T>()

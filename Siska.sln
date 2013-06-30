@@ -52,9 +52,12 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{5E75E69F-3E6
 		lib\Esent.Interop.dll = lib\Esent.Interop.dll
 		lib\FirstFloor.ModernUI.dll = lib\FirstFloor.ModernUI.dll
 		lib\FluentNHibernate.dll = lib\FluentNHibernate.dll
+		lib\HibernatingRhinos.Profiler.Appender.dll = lib\HibernatingRhinos.Profiler.Appender.dll
+		lib\HibernatingRhinos.Profiler.Production.dll = lib\HibernatingRhinos.Profiler.Production.dll
 		lib\Iesi.Collections.dll = lib\Iesi.Collections.dll
 		lib\log4net.dll = lib\log4net.dll
 		lib\Microsoft.Windows.Shell.dll = lib\Microsoft.Windows.Shell.dll
+		lib\Moq.dll = lib\Moq.dll
 		lib\NHibernate.ByteCode.Castle.dll = lib\NHibernate.ByteCode.Castle.dll
 		lib\NHibernate.dll = lib\NHibernate.dll
 		lib\NLog.dll = lib\NLog.dll
@@ -86,6 +89,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PandawaPOS", "Apps\PandawaPOS\PandawaPOS.csproj", "{794A0ABC-3157-4BCF-97F8-58CA4083967D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS.Data.Test", "Test\POS.Data.Test\POS.Data.Test.csproj", "{5E704EF1-9CB3-4F03-9395-2791A0ABC2FB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Siska.Service", "Backend\Siska.Service\Siska.Service.csproj", "{CC080248-980B-447B-A877-C7A75C78FABE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS.Service.Test", "Test\POS.Service.Test\POS.Service.Test.csproj", "{CD80CF93-A879-4FBD-A2A1-269D49060E4A}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -235,6 +242,30 @@ Global
 		{5E704EF1-9CB3-4F03-9395-2791A0ABC2FB}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{5E704EF1-9CB3-4F03-9395-2791A0ABC2FB}.Release|x64.ActiveCfg = Release|Any CPU
 		{5E704EF1-9CB3-4F03-9395-2791A0ABC2FB}.Release|x86.ActiveCfg = Release|Any CPU
+		{CC080248-980B-447B-A877-C7A75C78FABE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC080248-980B-447B-A877-C7A75C78FABE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC080248-980B-447B-A877-C7A75C78FABE}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CC080248-980B-447B-A877-C7A75C78FABE}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CC080248-980B-447B-A877-C7A75C78FABE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CC080248-980B-447B-A877-C7A75C78FABE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CC080248-980B-447B-A877-C7A75C78FABE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC080248-980B-447B-A877-C7A75C78FABE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC080248-980B-447B-A877-C7A75C78FABE}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CC080248-980B-447B-A877-C7A75C78FABE}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CC080248-980B-447B-A877-C7A75C78FABE}.Release|x64.ActiveCfg = Release|Any CPU
+		{CC080248-980B-447B-A877-C7A75C78FABE}.Release|x86.ActiveCfg = Release|Any CPU
+		{CD80CF93-A879-4FBD-A2A1-269D49060E4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CD80CF93-A879-4FBD-A2A1-269D49060E4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CD80CF93-A879-4FBD-A2A1-269D49060E4A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{CD80CF93-A879-4FBD-A2A1-269D49060E4A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{CD80CF93-A879-4FBD-A2A1-269D49060E4A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{CD80CF93-A879-4FBD-A2A1-269D49060E4A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{CD80CF93-A879-4FBD-A2A1-269D49060E4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CD80CF93-A879-4FBD-A2A1-269D49060E4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CD80CF93-A879-4FBD-A2A1-269D49060E4A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{CD80CF93-A879-4FBD-A2A1-269D49060E4A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{CD80CF93-A879-4FBD-A2A1-269D49060E4A}.Release|x64.ActiveCfg = Release|Any CPU
+		{CD80CF93-A879-4FBD-A2A1-269D49060E4A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -244,10 +275,12 @@ Global
 		{1069B9D4-EF88-4D2F-9724-57601B2ECBAB} = {73A2147E-48DF-4F74-B483-9166B293DD15}
 		{388C22A5-25EF-4292-9E6A-11C13F292FDB} = {73A2147E-48DF-4F74-B483-9166B293DD15}
 		{5F8B96FA-7AF8-49DC-8CB6-005C6781273A} = {73A2147E-48DF-4F74-B483-9166B293DD15}
+		{CC080248-980B-447B-A877-C7A75C78FABE} = {73A2147E-48DF-4F74-B483-9166B293DD15}
 		{31217F94-FFCF-4305-9C99-A4C98C2DAFCE} = {68F03E2D-FB69-4B51-B9B6-FD95749FA179}
 		{BE663D97-CE71-4A1D-8D5D-AE4E11D41004} = {68F03E2D-FB69-4B51-B9B6-FD95749FA179}
 		{A8374E47-15F7-4E7D-9303-121A61CF19D3} = {68F03E2D-FB69-4B51-B9B6-FD95749FA179}
 		{5E704EF1-9CB3-4F03-9395-2791A0ABC2FB} = {68F03E2D-FB69-4B51-B9B6-FD95749FA179}
+		{CD80CF93-A879-4FBD-A2A1-269D49060E4A} = {68F03E2D-FB69-4B51-B9B6-FD95749FA179}
 		{916953BA-A3F3-4938-BAFC-22FB23E8856C} = {924D09FD-06EA-4AA1-8BF3-E64223198D62}
 		{1B1599E5-40B5-42EA-B33B-CCF0A117FB62} = {924D09FD-06EA-4AA1-8BF3-E64223198D62}
 		{794A0ABC-3157-4BCF-97F8-58CA4083967D} = {924D09FD-06EA-4AA1-8BF3-E64223198D62}
