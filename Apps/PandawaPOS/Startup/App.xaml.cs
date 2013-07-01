@@ -11,7 +11,7 @@ namespace PandawaPOS
     {
         protected override void OnStartup(StartupEventArgs e)
         {
-            StartupUri = new Uri("/PandawaPOS;component/View/MainWindow.xaml",
+            StartupUri = new Uri("/PandawaPOS;component/View/LoginView.xaml",
                     UriKind.Relative);
         }
     }

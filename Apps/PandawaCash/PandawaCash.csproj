@@ -59,9 +59,10 @@
       <HintPath>..\..\lib\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor">
-      <HintPath>..\..\lib\Web\Castle.Windsor.dll</HintPath>
+      <HintPath>..\..\lib\Castle.Windsor.dll</HintPath>
     </Reference>
-    <Reference Include="FirstFloor.ModernUI">
+    <Reference Include="FirstFloor.ModernUI, Version=1.0.4.0, Culture=neutral, PublicKeyToken=2d21ec3cd074c59a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\FirstFloor.ModernUI.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.Extras.WPF45, Version=4.1.24.16411, Culture=neutral, PublicKeyToken=0e27b6f8be9b2ef7, processorArchitecture=MSIL">

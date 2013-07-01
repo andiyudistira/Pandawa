@@ -1,0 +1,47 @@
+﻿<mui:ModernWindow x:Class="PandawaPOS.View.LoginView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mui="http://firstfloorsoftware.com/ModernUI"
+        Title="User Login" Height="200" Width="300"
+        Style="{StaticResource EmptyWindow}"
+        WindowStartupLocation="CenterScreen">   
+    <mui:ModernWindow.Content>    
+        <StackPanel MinWidth="300" MinHeight="200" Style="{StaticResource ContentRoot}">
+            <TextBlock Text="PANDAWA POS" Style="{StaticResource Heading2}" Margin="0,0,0,8" />
+            
+            <mui:BBCodeBlock BBCode="Please input your username and password." Margin="0,0,0,16"/>
+
+            <!-- actual form starts here -->
+            <StackPanel x:Name="Form" Orientation="Vertical">
+
+                <StackPanel.Resources>
+                    <Style TargetType="StackPanel">
+                        <Setter Property="Orientation" Value="Horizontal" />
+                        <Setter Property="Margin" Value="0,0,0,4" />
+                    </Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Width" Value="100" />
+                        <Setter Property="VerticalAlignment" Value="Center" />
+                    </Style>
+                    <Style TargetType="CheckBox" BasedOn="{StaticResource {x:Type CheckBox}}">
+                        <Setter Property="Padding" Value="0,3" />
+                    </Style>
+                    <Style TargetType="RadioButton" BasedOn="{StaticResource {x:Type RadioButton}}">
+                        <Setter Property="Padding" Value="0,3" />
+                    </Style>
+                </StackPanel.Resources>
+
+                <StackPanel>
+                    <TextBlock Text="User name"/>
+                    <TextBox x:Name="txtUserName" Width="150" Text="{Binding FirstName, Mode=TwoWay, ValidatesOnDataErrors=True}" />
+                </StackPanel>
+                <StackPanel>
+                    <TextBlock Text="Password"/>
+                    <PasswordBox Password="" Width="150"  />
+                </StackPanel>
+
+                <Button Content="Login" Margin="100,16,0,0" HorizontalAlignment="Left" />
+            </StackPanel>
+        </StackPanel>
+    </mui:ModernWindow.Content>
+</mui:ModernWindow>

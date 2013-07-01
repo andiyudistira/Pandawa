@@ -10,8 +10,8 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!--<ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
-                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.Light.xaml" />-->
+                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.xaml" />
+                <ResourceDictionary Source="/FirstFloor.ModernUI;component/Assets/ModernUI.Light.xaml" />
                 <ResourceDictionary>
                     <siska:ViewModelLocator x:Key="ViewModelLocator" d:IsDataSource="True">
                         <siska:ViewModelLocator.Resolver>
