@@ -4,6 +4,7 @@ using Castle.Windsor;
 using GalaSoft.MvvmLight;
 using System;
 using System.IO;
+using Siska.Wpf.ViewModel;
 
 namespace Siska.Wpf
 {
@@ -15,7 +16,7 @@ namespace Siska.Wpf
 
             container.Register(
                 Classes.FromAssemblyNamed(System.Configuration.ConfigurationManager.AppSettings["AssemblyName"].ToString())
-                    .BasedOn<ViewModelBase>()
+                    .BasedOn<SiskaViewModel>()
                     .LifestyleTransient());
         }
     }

@@ -60,6 +60,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{5E75E69F-3E6
 		lib\Moq.dll = lib\Moq.dll
 		lib\NHibernate.ByteCode.Castle.dll = lib\NHibernate.ByteCode.Castle.dll
 		lib\NHibernate.dll = lib\NHibernate.dll
+		lib\NHibernate.Validator.dll = lib\NHibernate.Validator.dll
 		lib\NLog.dll = lib\NLog.dll
 		lib\Rhino.PersistentHashTable.dll = lib\Rhino.PersistentHashTable.dll
 		lib\Rhino.Queues.dll = lib\Rhino.Queues.dll
@@ -68,6 +69,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{5E75E69F-3E6
 		lib\System.Data.SQLite.dll = lib\System.Data.SQLite.dll
 		lib\System.Data.SQLite.Linq.dll = lib\System.Data.SQLite.Linq.dll
 		lib\Wintellect.Threading.dll = lib\Wintellect.Threading.dll
+		lib\WPFLocalizeExtension.dll = lib\WPFLocalizeExtension.dll
+		lib\XAMLMarkupExtensions.dll = lib\XAMLMarkupExtensions.dll
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "MvvmLight", "MvvmLight", "{6D9E1D84-3FD2-4E45-8C1B-BD017C6C2278}"
@@ -93,6 +96,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Siska.Service", "Backend\Siska.Service\Siska.Service.csproj", "{CC080248-980B-447B-A877-C7A75C78FABE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS.Service.Test", "Test\POS.Service.Test\POS.Service.Test.csproj", "{CD80CF93-A879-4FBD-A2A1-269D49060E4A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{AC933A9D-FCE3-460A-A98B-4E30C9C46231}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NHibernate.Validator", "Tools\NHibernate.Validator\NHibernate.Validator.csproj", "{599516E0-E10D-4F44-B5E1-B7B67EFC931A}"
 EndProject
 Global
 	GlobalSection(TestCaseManagementSettings) = postSolution
@@ -266,6 +273,18 @@ Global
 		{CD80CF93-A879-4FBD-A2A1-269D49060E4A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{CD80CF93-A879-4FBD-A2A1-269D49060E4A}.Release|x64.ActiveCfg = Release|Any CPU
 		{CD80CF93-A879-4FBD-A2A1-269D49060E4A}.Release|x86.ActiveCfg = Release|Any CPU
+		{599516E0-E10D-4F44-B5E1-B7B67EFC931A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{599516E0-E10D-4F44-B5E1-B7B67EFC931A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{599516E0-E10D-4F44-B5E1-B7B67EFC931A}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{599516E0-E10D-4F44-B5E1-B7B67EFC931A}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{599516E0-E10D-4F44-B5E1-B7B67EFC931A}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{599516E0-E10D-4F44-B5E1-B7B67EFC931A}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{599516E0-E10D-4F44-B5E1-B7B67EFC931A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{599516E0-E10D-4F44-B5E1-B7B67EFC931A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{599516E0-E10D-4F44-B5E1-B7B67EFC931A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{599516E0-E10D-4F44-B5E1-B7B67EFC931A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{599516E0-E10D-4F44-B5E1-B7B67EFC931A}.Release|x64.ActiveCfg = Release|Any CPU
+		{599516E0-E10D-4F44-B5E1-B7B67EFC931A}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -286,5 +305,6 @@ Global
 		{794A0ABC-3157-4BCF-97F8-58CA4083967D} = {924D09FD-06EA-4AA1-8BF3-E64223198D62}
 		{67A25085-A880-438E-8B4F-8C73C4B68FD9} = {9E6DDAE8-6EC7-4EE5-9611-95034E8D9627}
 		{6D9E1D84-3FD2-4E45-8C1B-BD017C6C2278} = {5E75E69F-3E62-498B-8503-28C676770CFD}
+		{599516E0-E10D-4F44-B5E1-B7B67EFC931A} = {AC933A9D-FCE3-460A-A98B-4E30C9C46231}
 	EndGlobalSection
 EndGlobal

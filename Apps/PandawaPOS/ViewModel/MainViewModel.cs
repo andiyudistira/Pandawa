@@ -1,72 +1,58 @@
-﻿using GalaSoft.MvvmLight;
-using PandawaPOS.Model;
-
-namespace PandawaPOS.ViewModel
+﻿namespace PandawaPOS.ViewModel
 {
-    /// <summary>
-    /// This class contains properties that the main View can data bind to.
-    /// <para>
-    /// See http://www.galasoft.ch/mvvm
-    /// </para>
-    /// </summary>
-    public class MainViewModel : ViewModelBase
+    using GalaSoft.MvvmLight.Messaging;
+    using GalaSoft.MvvmLight.Threading;
+    using Siska.Wpf.Manager;
+    using Siska.Wpf.ViewModel;
+    using Siska.Wpf.ViewModel.Message;
+
+    public class MainViewModel : SiskaViewModel
     {
-        private readonly IDataService _dataService;
+        private IMenuManager menuManager;
 
-        /// <summary>
-        /// The <see cref="WelcomeTitle" /> property's name.
-        /// </summary>
-        public const string WelcomeTitlePropertyName = "WelcomeTitle";
-
-        private string _welcomeTitle = string.Empty;
-
-        /// <summary>
-        /// Gets the WelcomeTitle property.
-        /// Changes to that property's value raise the PropertyChanged event. 
-        /// </summary>
-        public string WelcomeTitle
+        public IMenuManager MenuManager
         {
-            get
-            {
-                return _welcomeTitle;
-            }
-
+            get { return this.menuManager; }
             set
             {
-                if (_welcomeTitle == value)
-                {
-                    return;
-                }
-
-                _welcomeTitle = value;
-                RaisePropertyChanged(WelcomeTitlePropertyName);
+                this.menuManager = value;
+                this.OnPropertyChanged("MenuManager");
             }
         }
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel(IDataService dataService)
+        public MainViewModel(IAppSessionManager appSession, IMenuManager mManager)
+            : base(appSession)
         {
-            _dataService = dataService;
-            _dataService.GetData(
-                (item, error) =>
-                {
-                    if (error != null)
-                    {
-                        // Report error here
-                        return;
-                    }
+            Messenger.Default.Register<RefreshMenuMessage>(this, HandleRefreshMenuProcess);
+            Messenger.Default.Register<LoginMessage>(this, HandleLoginProcess);
+            Messenger.Default.Register<NavigateMenuMessage>(this, HandleNavigateMenuProcess);
+            menuManager = mManager;
 
-                    WelcomeTitle = item.Title;
-                });
+            menuManager.CreateMenu(AppSessionManager.IsAuthenticated);
         }
 
-        ////public override void Cleanup()
-        ////{
-        ////    // Clean up if needed
+        private void HandleLoginProcess(LoginMessage msg)
+        {
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+                menuManager.CreateMenu(AppSessionManager.IsAuthenticated);
+            });            
+        }
 
-        ////    base.Cleanup();
-        ////}
+        private void HandleNavigateMenuProcess(NavigateMenuMessage msg)
+        {
+            //Link selLink = from a in MenuLinkGroups
+        }
+
+        private void HandleRefreshMenuProcess(RefreshMenuMessage msg)
+        {
+            DispatcherHelper.CheckBeginInvokeOnUI(() =>
+            {
+                menuManager.ReloadMenu(AppSessionManager.IsAuthenticated);
+            }); 
+        }
     }
 }

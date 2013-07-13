@@ -19,7 +19,9 @@ namespace Siska.Wpf
             if (container == null)
             {
                 container = new WindsorContainer();
+                container.Install(new WindsorNHInstaller());
                 container.Install(new WindsorServiceInstaller());
+                container.Install(new WindsorManagerInstaller());
                 container.Install(new WindsorViewsInstaller());
             }
 

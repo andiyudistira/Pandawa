@@ -55,26 +55,52 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="FirstFloor.ModernUI">
+      <HintPath>..\..\lib\FirstFloor.ModernUI.dll</HintPath>
+    </Reference>
     <Reference Include="GalaSoft.MvvmLight.WPF45, Version=4.1.24.16411, Culture=neutral, PublicKeyToken=eabbf6a5f5af5004, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\MvvmLight\GalaSoft.MvvmLight.WPF45.dll</HintPath>
     </Reference>
+    <Reference Include="Iesi.Collections">
+      <HintPath>..\..\lib\Iesi.Collections.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Windows.Shell">
       <HintPath>..\..\lib\Microsoft.Windows.Shell.dll</HintPath>
     </Reference>
+    <Reference Include="NHibernate">
+      <HintPath>..\..\lib\NHibernate.dll</HintPath>
+    </Reference>
+    <Reference Include="NHibernate.Validator">
+      <HintPath>..\..\lib\NHibernate.Validator.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Xaml" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Data" />
     <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WPFLocalizeExtension">
+      <HintPath>..\..\lib\WPFLocalizeExtension.dll</HintPath>
+    </Reference>
+    <Reference Include="XAMLMarkupExtensions">
+      <HintPath>..\..\lib\XAMLMarkupExtensions.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="IViewModelResolver.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="Manager\IAppSessionManager.cs" />
+    <Compile Include="Manager\IMenuManager.cs" />
+    <Compile Include="Manager\MenuNames.cs" />
+    <Compile Include="PasswordBoxHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModelLocator.cs">
       <SubType>Code</SubType>
@@ -82,8 +108,35 @@
     <Compile Include="ViewModelResolver.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="ViewModel\Message\IMessageBase.cs" />
+    <Compile Include="ViewModel\Message\LoginMessage.cs" />
+    <Compile Include="ViewModel\Message\MessageBase.cs" />
+    <Compile Include="ViewModel\Message\NavigateMenuMessage.cs" />
+    <Compile Include="ViewModel\Message\ProcStatus.cs" />
+    <Compile Include="ViewModel\Message\RefreshMenuMessage.cs" />
+    <Compile Include="ViewModel\SiskaViewModel.cs" />
+    <Compile Include="WindsorManagerInstaller.cs" />
+    <Compile Include="WindsorNHInstaller.cs" />
     <Compile Include="WindsorServiceInstaller.cs" />
     <Compile Include="WindsorViewsInstaller.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Backend\Siska.Core\Siska.Core.csproj">
+      <Project>{42de2e81-81f4-4792-bb4d-2924f935f659}</Project>
+      <Name>Siska.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Backend\Siska.Data.NHibernate\Siska.Data.NHibernate.csproj">
+      <Project>{1069b9d4-ef88-4d2f-9724-57601b2ecbab}</Project>
+      <Name>Siska.Data.NHibernate</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Backend\Siska.Data\Siska.Data.csproj">
+      <Project>{5f8b96fa-7af8-49dc-8cb6-005c6781273a}</Project>
+      <Name>Siska.Data</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Backend\Siska.Service\Siska.Service.csproj">
+      <Project>{cc080248-980b-447b-a877-c7a75c78fabe}</Project>
+      <Name>Siska.Service</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

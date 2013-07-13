@@ -10,17 +10,17 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
 using System.Windows.Shapes;
-using FirstFloor.ModernUI.Windows.Controls;
 
-namespace PandawaPOS.View
+namespace PandawaPOS.View.Pages
 {
     /// <summary>
-    /// Interaction logic for LoginView.xaml
+    /// Interaction logic for RetailTransaction.xaml
     /// </summary>
-    public partial class LoginView : ModernWindow
+    public partial class RetailTransaction : UserControl
     {
-        public LoginView()
+        public RetailTransaction()
         {
             InitializeComponent();
         }

@@ -1,20 +1,23 @@
-﻿using FirstFloor.ModernUI.Presentation;
-using GalaSoft.MvvmLight;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Media;
-
-namespace PandawaPOS.ViewModel
+﻿namespace PandawaPOS.ViewModel
 {
+    using System;
+    using System.ComponentModel;
+    using System.Linq;
+    using System.Windows.Media;
+    using FirstFloor.ModernUI.Presentation;
+    using GalaSoft.MvvmLight.Command;
+    using GalaSoft.MvvmLight.Messaging;
+    using Siska.Wpf.Manager;
+    using Siska.Wpf.ViewModel;
+    using Siska.Wpf.ViewModel.Message;
+    using WPFLocalizeExtension.Engine;
+    using WPFLocalizeExtension.Providers;
+
     /// <summary>
     /// A simple view model for configuring theme, font and accent colors.
     /// </summary>
     public class SettingsAppearanceViewModel
-        : ViewModelBase, INotifyPropertyChanged
+        : SiskaViewModel
     {
         private const string FontSmall = "small";
         private const string FontLarge = "large";
@@ -60,41 +63,6 @@ namespace PandawaPOS.ViewModel
         private LinkCollection themes = new LinkCollection();
         private Link selectedTheme;
         private string selectedFontSize;
-
-        public SettingsAppearanceViewModel()
-        {
-            // add the default themes
-            this.themes.Add(new Link { DisplayName = "dark", Source = AppearanceManager.DarkThemeSource });
-            this.themes.Add(new Link { DisplayName = "light", Source = AppearanceManager.LightThemeSource });
-
-            // add additional themes
-            this.themes.Add(new Link { DisplayName = "bing image", Source = new Uri("/PandawaPOS;component/Assets/ModernUI.BingImage.xaml", UriKind.Relative) });
-            this.themes.Add(new Link { DisplayName = "hello kitty", Source = new Uri("/PandawaPOS;component/Assets/ModernUI.HelloKitty.xaml", UriKind.Relative) });
-            this.themes.Add(new Link { DisplayName = "love", Source = new Uri("/PandawaPOS;component/Assets/ModernUI.Love.xaml", UriKind.Relative) });
-            this.themes.Add(new Link { DisplayName = "snowflakes", Source = new Uri("/PandawaPOS;component/Assets/ModernUI.Snowflakes.xaml", UriKind.Relative) });
-
-            this.SelectedFontSize = AppearanceManager.Current.FontSize == FontSize.Large ? FontLarge : FontSmall;
-            SyncThemeAndColor();
-
-            AppearanceManager.Current.PropertyChanged += OnAppearanceManagerPropertyChanged;
-        }
-
-        private void SyncThemeAndColor()
-        {
-            // synchronizes the selected viewmodel theme with the actual theme used by the appearance manager.
-            this.SelectedTheme = this.themes.FirstOrDefault(l => l.Source.Equals(AppearanceManager.Current.ThemeSource));
-
-            // and make sure accent color is up-to-date
-            this.SelectedAccentColor = AppearanceManager.Current.AccentColor;
-        }
-
-        private void OnAppearanceManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
-        {
-            if (e.PropertyName == "ThemeSource" || e.PropertyName == "AccentColor")
-            {
-                SyncThemeAndColor();
-            }
-        }
 
         public LinkCollection Themes
         {
@@ -157,21 +125,50 @@ namespace PandawaPOS.ViewModel
             }
         }
 
-        /// <summary>
-        /// Occurs when a property value changes.
-        /// </summary>
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        /// <summary>
-        /// Raises the PropertyChanged event.
-        /// </summary>
-        /// <param name="propertyName">Name of the property.</param>
-        protected virtual void OnPropertyChanged(string propertyName)
+        public SettingsAppearanceViewModel(IAppSessionManager appSession)
+            : base(appSession)
         {
-            var handler = this.PropertyChanged;
-            if (handler != null)
+            // add the default themes            
+            this.themes.Add(new Link { DisplayName = "dark", Source = AppearanceManager.DarkThemeSource });
+            this.themes.Add(new Link { DisplayName = "light", Source = AppearanceManager.LightThemeSource });
+
+            // add additional themes
+            this.themes.Add(new Link { DisplayName = "bing image", Source = new Uri("/PandawaPOS;component/Assets/ModernUI.BingImage.xaml", UriKind.Relative) });
+            this.themes.Add(new Link { DisplayName = "hello kitty", Source = new Uri("/PandawaPOS;component/Assets/ModernUI.HelloKitty.xaml", UriKind.Relative) });
+            this.themes.Add(new Link { DisplayName = "love", Source = new Uri("/PandawaPOS;component/Assets/ModernUI.Love.xaml", UriKind.Relative) });
+            this.themes.Add(new Link { DisplayName = "snowflakes", Source = new Uri("/PandawaPOS;component/Assets/ModernUI.Snowflakes.xaml", UriKind.Relative) });
+
+            this.SelectedFontSize = AppearanceManager.Current.FontSize == FontSize.Large ? FontLarge : FontSmall;            
+            SyncThemeAndColor();
+
+            ResxLocalizationProvider.Instance.UpdateCultureList("PandawaPOS", "PandawaUI");
+            LocalizeDictionary.Instance.PropertyChanged += Instance_PropertyChanged;
+
+            AppearanceManager.Current.PropertyChanged += OnAppearanceManagerPropertyChanged;
+        }
+
+        private void Instance_PropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName.ToLower().Equals("culture"))
             {
-                handler(this, new PropertyChangedEventArgs(propertyName));
+                Messenger.Default.Send(new RefreshMenuMessage());
+            }
+        }
+
+        private void SyncThemeAndColor()
+        {
+            // synchronizes the selected viewmodel theme with the actual theme used by the appearance manager.
+            this.SelectedTheme = this.themes.FirstOrDefault(l => l.Source.Equals(AppearanceManager.Current.ThemeSource));                        
+
+            // and make sure accent color is up-to-date
+            this.SelectedAccentColor = AppearanceManager.Current.AccentColor;
+        }
+
+        private void OnAppearanceManagerPropertyChanged(object sender, PropertyChangedEventArgs e)
+        {
+            if (e.PropertyName == "ThemeSource" || e.PropertyName == "AccentColor")
+            {
+                SyncThemeAndColor();
             }
         }
     }
