@@ -1,0 +1,26 @@
+﻿namespace PandawaPOS.ViewModel
+{
+    using GalaSoft.MvvmLight;
+    using Siska.Wpf.Manager;
+    using Siska.Wpf.ViewModel;
+
+    /// <summary>
+    /// This class contains properties that a View can data bind to.
+    /// <para>
+    /// See http://www.galasoft.ch/mvvm
+    /// </para>
+    /// </summary>
+    public class RetailTransactionViewModel : SiskaViewModel
+    {
+        private IAppSessionManager appSession;
+
+        /// <summary>
+        /// Initializes a new instance of the RetailTransactionContentViewModel class.
+        /// </summary>
+        public RetailTransactionViewModel(IAppSessionManager sessionManager) 
+            : base (sessionManager)
+        {
+            appSession = sessionManager;
+        }
+    }
+}

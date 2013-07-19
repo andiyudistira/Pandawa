@@ -72,8 +72,8 @@
         #endregion
 
         #region Constructor
-        public LoginViewModel(IAppSessionManager appSession) 
-            : base(appSession)
+        public LoginViewModel(IAppSessionManager appSession, IDialogManager dialogManager) 
+            : base(appSession, dialogManager)
         {
             LogInClick = new RelayCommand<string>(DoLogin);
 
@@ -96,6 +96,9 @@
 
         private void DoLogin(string a)
         {
+            DialogManager.CreateDialog("Test", Siska.Wpf.Dialogs.PosDialogs.ItemDialogContent);
+            DialogManager.ShowDialog();
+
             ShowProgressBar = Visibility.Visible;
 
             AppSessionManager.Login(UserName, Password);

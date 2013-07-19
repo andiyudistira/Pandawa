@@ -1,5 +1,9 @@
 ﻿namespace PandawaPOS.ViewModel
 {
+    using System.Linq;
+    using System.Windows.Input; 
+    using System.Collections.Generic;       
+    using GalaSoft.MvvmLight.Command;
     using GalaSoft.MvvmLight.Messaging;
     using GalaSoft.MvvmLight.Threading;
     using Siska.Wpf.Manager;
@@ -9,6 +13,7 @@
     public class MainViewModel : SiskaViewModel
     {
         private IMenuManager menuManager;
+        private List<Key> pressedKeys; 
 
         public IMenuManager MenuManager
         {
@@ -19,6 +24,9 @@
                 this.OnPropertyChanged("MenuManager");
             }
         }
+
+        public RelayCommand<KeyEventArgs> KeyDownCommand { get; set; }
+        public RelayCommand<KeyEventArgs> KeyUpCommand { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -32,6 +40,10 @@
             menuManager = mManager;
 
             menuManager.CreateMenu(AppSessionManager.IsAuthenticated);
+
+            pressedKeys = new List<Key>();
+            KeyDownCommand = new RelayCommand<KeyEventArgs>(KeyDownCmd);
+            KeyUpCommand = new RelayCommand<KeyEventArgs>(KeyUpCmd);
         }
 
         private void HandleLoginProcess(LoginMessage msg)
@@ -53,6 +65,31 @@
             {
                 menuManager.ReloadMenu(AppSessionManager.IsAuthenticated);
             }); 
+        }
+
+        public void KeyUpCmd(KeyEventArgs e)
+        {
+            pressedKeys.Remove(e.Key);
+        }
+
+        public void KeyDownCmd(KeyEventArgs e)
+        {
+            Key cek = (from a in pressedKeys where a == e.Key select a).FirstOrDefault();
+
+            if (cek == Key.None)
+            {
+                pressedKeys.Add(e.Key);
+
+                foreach (var item in menuManager.MenuHotKey)
+                {
+                    List<Key> menuKey = item.Value.Cast<Key>().ToList();
+                    
+                    if (menuKey.Except(pressedKeys).ToList().FirstOrDefault() == Key.None)
+                    {
+                        MenuManager.NavigateToMenu(item.Key);
+                    }
+                }
+            }
         }
     }
 }

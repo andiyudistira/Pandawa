@@ -14,10 +14,19 @@
 
         protected IAppSessionManager AppSessionManager { get; private set; }
 
+        protected IDialogManager DialogManager { get; private set; }
+
         protected SiskaViewModel(IAppSessionManager sessionManager)
         {
             validation = NHibernate.Validator.Cfg.Environment.SharedEngineProvider.GetEngine();
             AppSessionManager = sessionManager;
+        }
+
+        protected SiskaViewModel(IAppSessionManager sessionManager, IDialogManager dialogManager)
+        {
+            validation = NHibernate.Validator.Cfg.Environment.SharedEngineProvider.GetEngine();
+            AppSessionManager = sessionManager;
+            DialogManager = dialogManager;
         }
 
         public string this[string propertyName]

@@ -3,15 +3,95 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"  
+             xmlns:cmd="http://www.galasoft.ch/mvvmlight"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
+             d:DesignHeight="768" d:DesignWidth="1024">
     <Grid Style="{StaticResource ContentRoot}">
-        <ScrollViewer>
-            <StackPanel MinWidth="200">
-                <TextBlock Text="Retail Transation" Style="{StaticResource Heading2}" />
-                <TextBlock Text="Content goes here" />
-            </StackPanel>
-        </ScrollViewer>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="180"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="120"/>
+        </Grid.RowDefinitions>
+        
+        <Grid Grid.Row="0" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="150"/>
+                <ColumnDefinition Width="250"/>                
+            </Grid.ColumnDefinitions>
+            
+            <TextBlock Grid.Row="0" Grid.Column="0" HorizontalAlignment="Left" Margin="10,10,0,10" TextWrapping="Wrap" 
+                       Text="Tanggal:" VerticalAlignment="Top" Height="16" Width="88"/>
+            <TextBlock Grid.Row="0" Grid.Column="1" HorizontalAlignment="Left" Margin="10,10,0,10" TextWrapping="Wrap" 
+                       VerticalAlignment="Top" RenderTransformOrigin="-0.042,0.875" Width="171" Height="23"/>
+            
+            <TextBlock  Grid.Row="1" Grid.Column="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" 
+                        Text="Kode Transaksi:" VerticalAlignment="Top" Height="16" Width="88" />
+            <TextBox Grid.Row="1" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,7,0,0"  
+                     TextWrapping="Wrap" VerticalAlignment="Top" Width="171" IsEnabled="False"/>
+
+            <TextBlock  Grid.Row="2" Grid.Column="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" 
+                        Text="Jenis Transaksi:" VerticalAlignment="Top" Height="16" Width="88" />
+            <ComboBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,7,0,0"  
+                     VerticalAlignment="Top" Width="171" IsEnabled="False"/>
+
+            <TextBlock  Grid.Row="3" Grid.Column="0" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" 
+                        Text="Kode Barang:" VerticalAlignment="Top" Height="16" Width="88" />
+            <TextBox Grid.Row="3" Grid.Column="1" HorizontalAlignment="Left" Height="23" Margin="10,7,0,0"  
+                     TextWrapping="Wrap" VerticalAlignment="Top" Width="171" IsEnabled="False">
+                <!--<i:Interaction.Triggers>
+                    <i:EventTrigger EventName="KeyDown">
+                        <cmd:EventToCommand Command="{Binding KodeBarangKeyDown, Mode=OneWay}" />
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>-->
+            </TextBox>
+        </Grid>
+        
+        <Grid Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <DataGrid HorizontalAlignment="Stretch" Margin="10,10,10,10" VerticalAlignment="Stretch">
+                <DataGrid.Columns>
+                    <mui:DataGridTextColumn Header="Kode Barang" Width="180"/>
+                    <mui:DataGridTextColumn Header="Nama Barang" Width="250"/>
+                    <mui:DataGridTextColumn Header="Satuan"/>
+                    <mui:DataGridCheckBoxColumn Header="Harga"/>
+                    <mui:DataGridComboBoxColumn Header="Diskon" />
+                    <mui:DataGridComboBoxColumn Header="Total Jumlah" />
+                    <mui:DataGridComboBoxColumn Header="Total Harga" />
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+
+        <Grid Grid.Row="2" HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
+            </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                    <ColumnDefinition Width="100"/>
+                </Grid.ColumnDefinitions>
+                
+                <Button Grid.Column="1" Content="Simpan" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Button Grid.Column="2" Content="Cetak" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Button Grid.Column="3" Content="Buka Drawer" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Button Grid.Column="4" Content="Tahan" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Button Grid.Column="5" Content="Batal" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                <Button Grid.Column="6" Content="Keluar" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

@@ -6,21 +6,32 @@ namespace Siska.Wpf.Manager
 
     public class MenuNames
     {
-        public static readonly string LOGIN_GROUPMENU = "Login";
-        public static readonly string TRANSACTION_GROUPMENU = "Transaction";
-
-        public static readonly string LOGIN_MENU = "Login";
-        public static readonly string RETAILTRANSACTION_MENU = "RetailTransaction";
-        public static readonly string PURCHASEORDER_MENU = "PurchaseOrderTransaction";
-
-        public IDictionary<string, Uri> MenuList { get; set; }
+        public IDictionary<PosMenus, Uri> MenuList { get; set; }
 
         public MenuNames()
         {
-            MenuList = new Dictionary<string, Uri>();
+            MenuList = new Dictionary<PosMenus, Uri>();
 
-            MenuList.Add(LOGIN_MENU, new Uri("/View/Pages/LoginView.xaml", UriKind.Relative));
-            MenuList.Add(RETAILTRANSACTION_MENU, new Uri("/View/Pages/RetailTransaction.xaml", UriKind.Relative));
+            MenuList.Add(PosMenus.Login, new Uri("/View/Pages/LoginView.xaml", UriKind.Relative));
+            MenuList.Add(PosMenus.RetailTransaction, new Uri("/View/Pages/RetailTransaction.xaml", UriKind.Relative));
+            MenuList.Add(PosMenus.PurchaseOrderTransaction, new Uri("/View/Pages/Introduction.xaml", UriKind.Relative));
+            MenuList.Add(PosMenus.InventoryTransaction, new Uri("/View/Pages/Introduction.xaml", UriKind.Relative));
+            MenuList.Add(PosMenus.TransactionDashboard, new Uri("/View/Pages/DashboardPos.xaml", UriKind.Relative));
+            MenuList.Add(PosMenus.InventoryDashboard, new Uri("/View/Pages/DashboardInventory.xaml", UriKind.Relative));
+            MenuList.Add(PosMenus.PosReport, new Uri("/View/Pages/DashboardPos.xaml", UriKind.Relative));
+            MenuList.Add(PosMenus.InventoryReport, new Uri("/View/Pages/DashboardInventory.xaml", UriKind.Relative));
         }
+    }
+
+    public enum PosMenus
+    {
+        Login = 1,
+        RetailTransaction = 2,
+        PurchaseOrderTransaction = 3,
+        InventoryTransaction = 4,
+        TransactionDashboard = 5,
+        InventoryDashboard = 6,
+        PosReport = 7,
+        InventoryReport = 8,
     }
 }

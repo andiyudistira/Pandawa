@@ -94,10 +94,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dialogs.cs" />
     <Compile Include="IViewModelResolver.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Manager\IAppSessionManager.cs" />
+    <Compile Include="Manager\IDialogManager.cs" />
     <Compile Include="Manager\IMenuManager.cs" />
     <Compile Include="Manager\MenuNames.cs" />
     <Compile Include="PasswordBoxHelper.cs" />
