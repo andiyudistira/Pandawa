@@ -1,13 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using NHibernate;
 using NHibernate.Criterion;
 using Siska.Core;
 using System.Collections;
-using System.Transactions;
-using NHibernate.Context;
 
 namespace Siska.Data.NHibernate.Dao
 {
@@ -17,10 +13,10 @@ namespace Siska.Data.NHibernate.Dao
     public abstract class HibernateDao
     {
         protected readonly Func<ISession> getSession;
-
+        
         public HibernateDao(Func<ISession> getSession)
 		{            
-			this.getSession = getSession;
+			this.getSession = getSession;            
 		}
 
         protected IList<T> GetAll<T>() where T : class

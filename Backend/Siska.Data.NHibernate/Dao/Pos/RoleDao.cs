@@ -7,6 +7,9 @@ using NHibernate.Transform;
 using Siska.Core;
 using Siska.Data.Dao;
 using Siska.Data.Model.Pos;
+using NHibernate.Cfg;
+using FluentNHibernate.Cfg;
+using NHibernate.Tool.hbm2ddl;
 
 namespace Siska.Data.NHibernate.Dao.Pos
 {
@@ -16,6 +19,21 @@ namespace Siska.Data.NHibernate.Dao.Pos
             : base(getSession)
 		{
 		}
+
+        [Transaction]
+        public void TestPrepare()
+        {
+            var cfg = new Configuration().Configure();
+
+            FluentConfiguration fc = Fluently.Configure(cfg)
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Siska.Data.NHibernate.Dao.HibernateDao>());
+
+            cfg = fc.BuildConfiguration();
+
+            SchemaExport schemaExport = new SchemaExport(cfg);
+            schemaExport.SetOutputFile("C:\\MyDDL.sql");
+            schemaExport.Execute(true, true, false, getSession().Connection, null);
+        }
 
         [Transaction]
         public Role Get(int id)

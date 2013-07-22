@@ -8,6 +8,9 @@ using NHibernate.Transform;
 using Siska.Core;
 using Siska.Data.Dao;
 using Siska.Data.Model.Pos;
+using NHibernate.Cfg;
+using FluentNHibernate.Cfg;
+using NHibernate.Tool.hbm2ddl;
 
 namespace Siska.Data.NHibernate.Dao.Pos
 {
@@ -15,8 +18,23 @@ namespace Siska.Data.NHibernate.Dao.Pos
     {
         public UserDao(Func<ISession> getSession)
             : base(getSession)
-		{
+		{            
 		}
+
+        [Transaction]
+        public void TestPrepare()
+        {
+            var cfg = new Configuration().Configure();
+
+            FluentConfiguration fc = Fluently.Configure(cfg)
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Siska.Data.NHibernate.Dao.HibernateDao>());
+
+            cfg = fc.BuildConfiguration();
+
+            SchemaExport schemaExport = new SchemaExport(cfg);
+            schemaExport.SetOutputFile("C:\\MyDDL.sql");
+            schemaExport.Execute(true, true, false, getSession().Connection, null);
+        }
 
         [Transaction]
         public User Get(int id)
@@ -27,6 +45,8 @@ namespace Siska.Data.NHibernate.Dao.Pos
         [Transaction]
         public IList<User> GetAll()
         {
+            TestPrepare();
+
             ICriteria criteria = getSession().CreateCriteria<User>()
                                     .SetFetchMode("Roles", FetchMode.Eager)
                                     .SetFetchMode("UserSessions", FetchMode.Eager)

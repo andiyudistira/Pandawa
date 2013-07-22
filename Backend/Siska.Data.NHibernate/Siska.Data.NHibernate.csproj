@@ -91,25 +91,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Dao\Acc\CategoryDao.cs" />
-    <Compile Include="Dao\Acc\AccountDao.cs" />
     <Compile Include="Dao\HibernateDao.cs">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Compile>
     <Compile Include="Dao\Pos\RoleDao.cs" />
     <Compile Include="Dao\Pos\UserDao.cs" />
     <Compile Include="Dao\Pos\UserSessionDao.cs" />
-    <Compile Include="Mappings\Acc\AccAccountMap.cs" />
-    <Compile Include="Mappings\Acc\AccCategoryMap.cs" />
-    <Compile Include="Mappings\Acc\AccTransactionDetailMap.cs" />
-    <Compile Include="Mappings\Acc\AccTransactionMap.cs" />
     <Compile Include="Mappings\Pos\RoleMap.cs" />
     <Compile Include="Mappings\Pos\UserMap.cs" />
     <Compile Include="Mappings\Pos\UserSessionMap.cs" />
     <Compile Include="Mappings\Pos\UsersInRoleMap.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Dao\Acc\" />
+    <Folder Include="Mappings\Acc\" />
+  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Siska.Core\Siska.Core.csproj">
       <Project>{42DE2E81-81F4-4792-BB4D-2924F935F659}</Project>

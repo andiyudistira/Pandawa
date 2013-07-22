@@ -37,15 +37,10 @@ namespace POS.Data.Test
 
         public FluentConfiguration BuildFluent()
         {
-            var cfg = new Configuration().Configure();
+            var cfg = new Configuration().Configure();                           
 
-            FluentConfiguration fc = Fluently.Configure(cfg)
+            return Fluently.Configure(cfg)
                 .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Siska.Data.NHibernate.Dao.HibernateDao>());
-
-            //SchemaExport schemaExport = new SchemaExport(fc);
-            //schemaExport.Execute(false, true, false);
-
-            return fc;
         }
 
         public void Registered(NHibernate.ISessionFactory factory)

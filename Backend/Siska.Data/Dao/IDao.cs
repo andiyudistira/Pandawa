@@ -13,6 +13,8 @@ namespace Siska.Data.Dao
     /// <typeparam name="TId">Entity ID type</typeparam>
     public interface IDao<TEntity, TId>
     {
+        void TestPrepare();
+
         /// <summary>
         /// Finds entity with given id.
         /// </summary>
