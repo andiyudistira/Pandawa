@@ -11,6 +11,8 @@ using Castle.Facilities.AutoTx;
 using Castle.Facilities.Logging;
 using Siska.Data;
 using Castle.Core;
+using NHibernate.Tool.hbm2ddl;
+using NHibernate.Context;
 
 namespace POS.Data.Test
 {
@@ -36,6 +38,8 @@ namespace POS.Data.Test
                     Component.For<Logger>().LifeStyle.Singleton)
                     .AddFacility<NHibernateFacility>();
 
+            ExportDatabaseSchema();
+
             AssemblyFilter filter = new AssemblyFilter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ""));
 
             container.Register(Classes.FromAssemblyInDirectory(filter)
@@ -57,6 +61,33 @@ namespace POS.Data.Test
         protected void Resolve(object _object)
         {
             container.Release(_object);
+        }
+
+        protected void ExportDatabaseSchema()
+        {
+            Configuration[] cfgs = container.ResolveAll<Configuration>();
+
+            ICurrentSessionContext ctx = container.Resolve<ICurrentSessionContext>();
+            ISessionFactory session = container.Resolve<ISessionFactory>();
+            ISessionManager sessionManager = container.Resolve<ISessionManager>();            
+
+            foreach (Configuration cfg in cfgs)
+            {
+                SchemaExport export = new SchemaExport(cfg);
+                //export.Create(false, true);
+                export.Execute(false, true, false, sessionManager.OpenSession().Connection, null);
+            }
+
+            //var cfg = new Configuration().Configure();
+
+            //FluentConfiguration fc = Fluently.Configure(cfg)
+            //    .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Siska.Data.NHibernate.Dao.HibernateDao>());
+
+            //cfg = fc.BuildConfiguration();
+
+            //SchemaExport schemaExport = new SchemaExport(cfg);
+            //schemaExport.SetOutputFile("C:\\MyDDL.sql");
+            //schemaExport.Execute(true, true, false, getSession().Connection, null);
         }
     }
 }
