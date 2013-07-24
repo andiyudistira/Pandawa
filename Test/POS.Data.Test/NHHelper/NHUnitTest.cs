@@ -13,6 +13,9 @@ using Siska.Data;
 using Castle.Core;
 using NHibernate.Tool.hbm2ddl;
 using NHibernate.Context;
+using Siska.Data.NHibernate.Dao.Pos;
+using Siska.Data.Model.Pos;
+using System.Collections.Generic;
 
 namespace POS.Data.Test
 {
@@ -21,6 +24,8 @@ namespace POS.Data.Test
         protected ISessionFactory sessionFactory;
         protected Configuration configuration;
         protected IWindsorContainer container;
+        private ISessionManager globalSessionManager;
+        protected ISession globalSession;
 
         public NHUnitTest()
         {
@@ -29,6 +34,8 @@ namespace POS.Data.Test
             container = new WindsorContainer();
             
             container.AddFacility<LoggingFacility>(f => f.LogUsing(LoggerImplementation.Log4net).WithAppConfig());
+            log4net.Config.XmlConfigurator.Configure();
+
             container.Register(Component.For<DaoInterceptor>());
 
             container
@@ -48,9 +55,7 @@ namespace POS.Data.Test
                                   .WithService.DefaultInterfaces()
                                   .LifestyleSingleton()
                                   .Configure(delegate(ComponentRegistration c) { var x = c.Interceptors(InterceptorReference.ForType<DaoInterceptor>()).Anywhere; })
-                                );
-
-            log4net.Config.XmlConfigurator.Configure();
+                                );            
         }
 
         protected T Resolve<T>()
@@ -66,28 +71,87 @@ namespace POS.Data.Test
         protected void ExportDatabaseSchema()
         {
             Configuration[] cfgs = container.ResolveAll<Configuration>();
+            
+            globalSessionManager = container.Resolve<ISessionManager>();
 
-            ICurrentSessionContext ctx = container.Resolve<ICurrentSessionContext>();
-            ISessionFactory session = container.Resolve<ISessionFactory>();
-            ISessionManager sessionManager = container.Resolve<ISessionManager>();            
+            globalSession = globalSessionManager.OpenSession();
 
             foreach (Configuration cfg in cfgs)
             {
                 SchemaExport export = new SchemaExport(cfg);
                 //export.Create(false, true);
-                export.Execute(false, true, false, sessionManager.OpenSession().Connection, null);
+                export.Execute(false, true, false, globalSession.Connection, null);
             }
 
-            //var cfg = new Configuration().Configure();
-
-            //FluentConfiguration fc = Fluently.Configure(cfg)
-            //    .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Siska.Data.NHibernate.Dao.HibernateDao>());
-
-            //cfg = fc.BuildConfiguration();
+            prepareTestData();
 
             //SchemaExport schemaExport = new SchemaExport(cfg);
             //schemaExport.SetOutputFile("C:\\MyDDL.sql");
             //schemaExport.Execute(true, true, false, getSession().Connection, null);
+        }
+
+        private void prepareTestData()
+        {
+            UserDao userDao = new UserDao(() => globalSession);
+            RoleDao roleDao = new RoleDao(() => globalSession);
+            UserSessionDao userSessionDao = new UserSessionDao(() => globalSession);
+
+            #region Prepare User Data
+            User userAndi = new User();
+            userAndi.UserName = "andi";
+            userAndi.Password = "password";
+            userAndi.RecordStatus = true;
+            userDao.Add(userAndi);
+
+            User userAdmin = new User();
+            userAdmin.UserName = "admin";
+            userAdmin.Password = "password";
+            userAdmin.RecordStatus = true;
+            userDao.Add(userAdmin);
+
+            User userTester = new User();
+            userTester.UserName = "tester";
+            userTester.Password = "password";
+            userTester.RecordStatus = true;
+            userDao.Add(userTester);
+            #endregion
+
+            #region Prepare Role Data
+            Role roleAdmin = new Role();
+            roleAdmin.RoleName = "admin";
+            roleAdmin.RecordStatus = true;
+            roleAdmin.InsertBy = userAdmin;
+            roleAdmin.InsertDate = DateTime.Today;
+            roleDao.Add(roleAdmin);
+
+            Role roleOperator = new Role();
+            roleOperator.RoleName = "operator";
+            roleOperator.RecordStatus = true;
+            roleOperator.InsertBy = userAdmin;
+            roleOperator.InsertDate = DateTime.Today;
+            roleDao.Add(roleOperator);
+
+            Role roleStaff = new Role();
+            roleStaff.RoleName = "staff";
+            roleStaff.RecordStatus = true;
+            roleStaff.InsertBy = userAdmin;
+            roleStaff.InsertDate = DateTime.Today;
+            roleDao.Add(roleStaff);
+
+            Role roleCashier = new Role();
+            roleCashier.RoleName = "cashier";
+            roleCashier.RecordStatus = true;
+            roleCashier.InsertBy = userAdmin;
+            roleCashier.InsertDate = DateTime.Today;
+            roleDao.Add(roleCashier);
+            #endregion
+
+            #region User Role Data
+            userAndi.Roles = new List<Role>();
+            userAndi.Roles.Add(roleAdmin);
+            userAndi.Roles.Add(roleStaff);
+            userDao.Update(userAndi);
+            #endregion
         }
     }
 }

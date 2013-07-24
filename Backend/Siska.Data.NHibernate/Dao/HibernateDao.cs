@@ -23,11 +23,8 @@ namespace Siska.Data.NHibernate.Dao
         {
             IList<T> result = null;
 
-            using (var s = getSession())
-            {
-                ICriteria criteria = getSession().CreateCriteria<T>();
-                result = criteria.List<T>();
-            }
+            ICriteria criteria = getSession().CreateCriteria<T>();
+            result = criteria.List<T>();
 
             return result;
         }
@@ -36,30 +33,27 @@ namespace Siska.Data.NHibernate.Dao
         {
             IList<T> result = null;
 
-            using (var s = getSession())
-            {
-                ICriteria criteria = s.CreateCriteria<T>();
+            ICriteria criteria = getSession().CreateCriteria<T>();
 
-                foreach (CriteriaParam item in itemParams)
+            foreach (CriteriaParam item in itemParams)
+            {
+                if ((!item.Operator.Equals(Operators.And)) && (!item.Operator.Equals(Operators.Or)))
                 {
-                    if ((!item.Operator.Equals(Operators.And)) && (!item.Operator.Equals(Operators.Or)))
+                    criteria.Add(CreateCriterion(item));
+                }
+                else
+                {
+                    if (item.Operator.Equals(Operators.Or))
                     {
-                        criteria.Add(CreateCriterion(item));
+                        ICriterion leftCriterion = CreateCriterion(item.Left);
+                        ICriterion rightCriterion = CreateCriterion(item.Right);
+                        criteria.Add(Restrictions.Or(leftCriterion, rightCriterion));
                     }
-                    else
+                    else if (item.Operator.Equals(Operators.And))
                     {
-                        if (item.Operator.Equals(Operators.Or))
-                        {
-                            ICriterion leftCriterion = CreateCriterion(item.Left);
-                            ICriterion rightCriterion = CreateCriterion(item.Right);
-                            criteria.Add(Restrictions.Or(leftCriterion, rightCriterion));
-                        }
-                        else if (item.Operator.Equals(Operators.And))
-                        {
-                            ICriterion leftCriterion = CreateCriterion(item.Left);
-                            ICriterion rightCriterion = CreateCriterion(item.Right);
-                            criteria.Add(Restrictions.And(leftCriterion, rightCriterion));
-                        }
+                        ICriterion leftCriterion = CreateCriterion(item.Left);
+                        ICriterion rightCriterion = CreateCriterion(item.Right);
+                        criteria.Add(Restrictions.And(leftCriterion, rightCriterion));
                     }
                 }
 
@@ -71,35 +65,32 @@ namespace Siska.Data.NHibernate.Dao
 
         protected ICriteria CreateCriteriaOnly<T>(List<CriteriaParam> itemParams) where T : class
         {
-            using (var s = getSession())
-            {
-                ICriteria criteria = s.CreateCriteria<T>();
+            ICriteria criteria = getSession().CreateCriteria<T>();
 
-                foreach (CriteriaParam item in itemParams)
+            foreach (CriteriaParam item in itemParams)
+            {
+                if ((!item.Operator.Equals(Operators.And)) && (!item.Operator.Equals(Operators.Or)))
                 {
-                    if ((!item.Operator.Equals(Operators.And)) && (!item.Operator.Equals(Operators.Or)))
+                    criteria.Add(CreateCriterion(item));
+                }
+                else
+                {
+                    if (item.Operator.Equals(Operators.Or))
                     {
-                        criteria.Add(CreateCriterion(item));
+                        ICriterion leftCriterion = CreateCriterion(item.Left);
+                        ICriterion rightCriterion = CreateCriterion(item.Right);
+                        criteria.Add(Restrictions.Or(leftCriterion, rightCriterion));
                     }
-                    else
+                    else if (item.Operator.Equals(Operators.And))
                     {
-                        if (item.Operator.Equals(Operators.Or))
-                        {
-                            ICriterion leftCriterion = CreateCriterion(item.Left);
-                            ICriterion rightCriterion = CreateCriterion(item.Right);
-                            criteria.Add(Restrictions.Or(leftCriterion, rightCriterion));
-                        }
-                        else if (item.Operator.Equals(Operators.And))
-                        {
-                            ICriterion leftCriterion = CreateCriterion(item.Left);
-                            ICriterion rightCriterion = CreateCriterion(item.Right);
-                            criteria.Add(Restrictions.And(leftCriterion, rightCriterion));
-                        }
+                        ICriterion leftCriterion = CreateCriterion(item.Left);
+                        ICriterion rightCriterion = CreateCriterion(item.Right);
+                        criteria.Add(Restrictions.And(leftCriterion, rightCriterion));
                     }
                 }
-
-                return criteria;
             }
+
+            return criteria;
         }
 
         protected ICriterion CreateCriterion(CriteriaParam item)

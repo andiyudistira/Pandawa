@@ -7,6 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Siska.Core;
 using Siska.Data.Dao;
 using Siska.Data.Model.Pos;
+using Siska.Data.NHibernate.Dao.Pos;
 
 namespace POS.Data.Test
 {
@@ -15,17 +16,28 @@ namespace POS.Data.Test
     {
         private IUserDao UserDao
         {
-            get { return Resolve<IUserDao>(); }
+            get;
+            set;
         }
 
         private IRoleDao RoleDao
         {
-            get { return Resolve<IRoleDao>(); }
+            get;
+            set;
         }
 
         private IUserSessionDao UserSessionDao
         {
-            get { return Resolve<IUserSessionDao>(); }
+            get;
+            set;
+        }
+        
+        [TestInitialize]
+        public void SetupDaoSession()
+        {
+            UserDao = new UserDao(() => globalSession);
+            RoleDao = new RoleDao(() => globalSession);
+            UserSessionDao = new UserSessionDao(() => globalSession);
         }
 
         [TestMethod]
@@ -38,7 +50,7 @@ namespace POS.Data.Test
         public void RecordFetchTest()
         {
             // Test Fetch all without parameter
-            var accountDt = UserDao.GetAll();
+            //var accountDt = UserDao.GetAll();
 
             // Test Fetch all with parameter
             List<CriteriaParam> param = new List<CriteriaParam>();                      
