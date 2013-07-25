@@ -14,14 +14,19 @@ namespace Siska.Wpf
     {
         public void Install(IWindsorContainer container, IConfigurationStore store)
         {
-            AssemblyFilter filter = new AssemblyFilter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ""));
-
             container.Register(
                 Classes.FromAssemblyNamed(System.Configuration.ConfigurationManager.AppSettings["AssemblyName"].ToString())
                     .Where(c => c.IsClass && c.Name.Contains("Service"))
                     .WithService.DefaultInterfaces()
                     .LifestyleTransient());
 
+            container.Register(
+                Classes.FromAssemblyNamed(System.Configuration.ConfigurationManager.AppSettings["ServiceAssemblyName"].ToString())
+                      .Where(c => c.IsClass && c.Name.Contains("Service"))
+                      .WithService.DefaultInterfaces()
+                      .LifestyleSingleton()
+                      //.Configure(delegate(ComponentRegistration c) { var x = c.Interceptors(InterceptorReference.ForType<DaoInterceptor>()).Anywhere; })
+                    ); 
         }
     }
 }

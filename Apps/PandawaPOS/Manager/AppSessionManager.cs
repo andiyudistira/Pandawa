@@ -1,9 +1,12 @@
 ﻿namespace PandawaPOS.Manager
 {
     using System;
+    using System.Collections;
     using System.ComponentModel;
     using System.Threading;
+    using Siska.Core;
     using Siska.Data.Dto.Pos;
+    using Siska.Service;
     using Siska.Wpf.Manager;
 
     public class AppSessionManager : IAppSessionManager
@@ -48,9 +51,10 @@
             }
         }
 
+        private ISessionService SessionService;
         public event EventHandler UserAuthenticated;
 
-        public AppSessionManager()
+        public AppSessionManager(ISessionService sessionService)
         {
             IsAuthenticated = false;
 
@@ -59,6 +63,8 @@
 
             AuthUser = new UserDto();
             wrongAuthCount = 0;
+
+            SessionService = sessionService;
         }
 
         private void loginWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -74,10 +80,38 @@
         }
 
         private void loginWorker_DoWork(object sender, DoWorkEventArgs e)
-        {
-            Thread.Sleep(2000);
+        {            
             // do login in here
-            e.Result = true;
+            ServiceRequest req = new ServiceRequest();
+            req.NoData = true;
+
+            Hashtable serviceParams = new Hashtable();
+
+            serviceParams.Add(ServiceConstants.USERNAME, authUser.UserName);
+            serviceParams.Add(ServiceConstants.PASSWORD, authUser.Password);
+            serviceParams.Add(ServiceConstants.RECORDSTATUS, true);
+
+            req.Parameters = serviceParams;
+
+            ServiceResponse serviceResult = SessionService.StartSession(req);
+
+            if (serviceResult.IsSuccess)
+            {
+                AuthUser = serviceResult.Data as UserDto;
+
+                if (AuthUser != null)
+                {
+                    e.Result = true;
+                }
+                else
+                {
+                    e.Result = false;
+                }
+            }
+            else
+            {
+                e.Result = false;
+            }            
         }
 
         public void Login(string userName, string password)

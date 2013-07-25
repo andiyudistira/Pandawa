@@ -21,6 +21,8 @@ namespace PandawaPOS
             AppearanceManager.Current.ThemeSource = new Uri("/PandawaPOS;component/Assets/ModernUI.Snowflakes.xaml", UriKind.Relative);
 
             LocalizeDictionary.Instance.Culture = new System.Globalization.CultureInfo("id-ID");
+
+            HibernatingRhinos.Profiler.Appender.NHibernate.NHibernateProfiler.Initialize();
         }
     }
 }

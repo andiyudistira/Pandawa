@@ -19,7 +19,7 @@
 
         private string userName;
 
-        private string password;
+        private string passwordx;
 
         private bool canSignIn;
         #endregion
@@ -60,13 +60,15 @@
             }
         }
 
-        public string Password
+        [NotNullNotEmpty]
+        public string Passwordx
         {
-            get { return password; }
+            get { return passwordx; }
             set
             {
-                password = value;
-                OnPropertyChanged("Password");                
+                passwordx = value;
+                OnPropertyChanged("Passwordx");
+                CanSignIn = CheckValidation();
             }
         }
         #endregion
@@ -101,7 +103,7 @@
 
             ShowProgressBar = Visibility.Visible;
 
-            AppSessionManager.Login(UserName, Password);
+            AppSessionManager.Login(UserName, Passwordx);
         }
 
         private void Instance_PropertyChanged(object sender, PropertyChangedEventArgs e)

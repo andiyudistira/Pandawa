@@ -1,4 +1,4 @@
-﻿namespace POS.Data.Test
+﻿namespace Siska.Wpf
 {
     using Castle.Facilities.NHibernate;
     using Castle.Transactions;

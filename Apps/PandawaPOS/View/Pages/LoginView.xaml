@@ -8,7 +8,7 @@
              xmlns:Ext="clr-namespace:XAMLMarkupExtensions.Strings;assembly=XAMLMarkupExtensions"
              xmlns:cmd="http://www.galasoft.ch/mvvmlight"
              xmlns:mui="http://firstfloorsoftware.com/ModernUI"
-             xmlns:password="clr-namespace:Siska.Wpf;assembly=Siska.Wpf"
+             xmlns:w="clr-namespace:Siska.Wpf;assembly=Siska.Wpf"
              lex:ResxLocalizationProvider.DefaultAssembly="PandawaPOS"
              lex:ResxLocalizationProvider.DefaultDictionary="PandawaUI"
              mc:Ignorable="d" 
@@ -52,10 +52,12 @@
                     <TextBlock Grid.Column="0" Grid.Row="1" Text="{lex:Loc Login_Password}" VerticalAlignment="Center" Margin="0,0,16,0" />
                     <PasswordBox Grid.Column="1" Grid.Row="1" 
                                  FontWeight="Bold"                                 
-                                 password:BoundPasswordBox.BoundPassword="{Binding Path=Password}"
+                                 w:PasswordHelper.Attach="True" 
+                                 w:PasswordHelper.Password="{Binding Text, ElementName=plain, Mode=TwoWay}" 
                                  HorizontalAlignment="Left" VerticalAlignment="Center"
                                  Width="220" MaxLength="50" Margin="3.5">
                     </PasswordBox>
+                    <TextBlock Padding="10,0" x:Name="plain" Text="{Binding Passwordx, Mode=TwoWay}" Visibility="Collapsed" />
 
                     <TextBlock Grid.Row="2" Grid.Column="0" Text="{lex:Loc Login_Language}" VerticalAlignment="Center" Margin="0,0,16,0" />
                     <ComboBox Grid.Row="2" Grid.Column="1" ItemsSource="{Binding Source={x:Static lex:LocalizeDictionary.Instance}, Path=MergedAvailableCultures}"

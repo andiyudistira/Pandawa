@@ -20,6 +20,7 @@ namespace Siska.Wpf
             {
                 container = new WindsorContainer();
                 container.Install(new WindsorNHInstaller());
+                container.Install(new WindsorDaoInstaller());
                 container.Install(new WindsorServiceInstaller());
                 container.Install(new WindsorManagerInstaller());
                 container.Install(new WindsorViewsInstaller());

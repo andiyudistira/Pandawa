@@ -17,6 +17,11 @@ namespace Siska.Service
 
         public IUserSessionDao UserSessionDao { get; set; }
 
+        public SessionService(IUserDao userDao)
+        {
+            UserDao = userDao;
+        }
+
         public ServiceResponse StartSession(ServiceRequest serviceParams)
         {
             ServiceResponse response = new ServiceResponse(false);

@@ -50,7 +50,10 @@ namespace POS.Data.Test
         public void RecordFetchTest()
         {
             // Test Fetch all without parameter
-            //var accountDt = UserDao.GetAll();
+            var allUserDt = UserDao.GetAll();
+
+            Assert.IsTrue(allUserDt != null);
+            Assert.IsTrue(allUserDt.Count > 0);
 
             // Test Fetch all with parameter
             List<CriteriaParam> param = new List<CriteriaParam>();                      
@@ -58,7 +61,10 @@ namespace POS.Data.Test
             //param.Add(new CriteriaParam() { FieldName = "UserName", Operator = Operators.Or, Value = "", Left = leftParam, Right = rightParam });
             param.Add(new CriteriaParam() { FieldName = "UserName", Operator = Operators.Equals, Value = "andi" });
 
-            var userTest = UserDao.GetByCriteria(param);
+            var userTest = UserDao.GetByCriteria(param).FirstOrDefault();
+
+            Assert.IsTrue(userTest != null);
+            Assert.IsTrue(userTest.UserName.ToLower().Equals("andi"));            
         }
 
         [TestMethod]
