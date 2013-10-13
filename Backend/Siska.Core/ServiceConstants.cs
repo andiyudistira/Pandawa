@@ -12,5 +12,6 @@ namespace Siska.Core
         public const string PASSWORD = "Password";
         public const string SESSIONID = "SessionID";
         public const string RECORDSTATUS = "RecordStatus";
+        public const string LOGONSTATUS = "LoginStatus";
     }
 }

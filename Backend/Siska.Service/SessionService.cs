@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using Siska.Core;
-using Siska.Data.Dao;
-using Siska.Data.Dto.Pos;
-using Siska.Data.Model.Pos;
-
-namespace Siska.Service
+﻿namespace Siska.Service
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using AutoMapper;
+    using Siska.Core;
+    using Siska.Data.Dao;
+    using Siska.Data.Dto.Pos;
+    using Siska.Data.Model.Pos;
+    
     public class SessionService : ServiceBase, ISessionService
     {
         public IUserDao UserDao { get; set; }
@@ -58,7 +56,34 @@ namespace Siska.Service
             }
             else
             {
-                ServiceException exception = new ServiceException("Username or password is wrong!");
+                ServiceException exception = new ServiceException(ErrorType.ErrorText(ErrorCode.SESSIONSERVICE_WRONG_USERNAME_PASSWORD));
+                exception.ErrorCode = ErrorCode.SESSIONSERVICE_WRONG_USERNAME_PASSWORD;
+
+                throw exception;
+            }
+
+            return response;
+        }
+
+        public ServiceResponse UnlockSession(ServiceRequest serviceParams)
+        {
+            ServiceResponse response = new ServiceResponse(false);
+
+            List<CriteriaParam> param = new List<CriteriaParam>();
+
+            string userName = serviceParams.Parameters[ServiceConstants.USERNAME].ToString();
+            string password = serviceParams.Parameters[ServiceConstants.PASSWORD].ToString();
+
+            param.Add(new CriteriaParam() { FieldName = ServiceConstants.USERNAME, Operator = Operators.Equals, Value = userName });
+            param.Add(new CriteriaParam() { FieldName = ServiceConstants.PASSWORD, Operator = Operators.Equals, Value = password });
+            param.Add(new CriteriaParam() { FieldName = ServiceConstants.RECORDSTATUS, Operator = Operators.Equals, Value = true });
+
+            User user = UserDao.GetByCriteria(param).FirstOrDefault();
+
+            if (user == null)
+            {
+                ServiceException exception = new ServiceException(ErrorType.ErrorText(ErrorCode.SESSIONSERVICE_WRONG_USERNAME_PASSWORD));
+                exception.ErrorCode = ErrorCode.SESSIONSERVICE_WRONG_USERNAME_PASSWORD;
 
                 throw exception;
             }
@@ -89,7 +114,63 @@ namespace Siska.Service
             }
             else
             {
-                ServiceException exception = new ServiceException("Session doesn't exist");
+                ServiceException exception = new ServiceException(ErrorType.ErrorText(ErrorCode.SESSIONSERVICE_SESSION_DOESNT_EXIST));
+                exception.ErrorCode = ErrorCode.SESSIONSERVICE_SESSION_DOESNT_EXIST;
+
+                throw exception;
+            }
+
+            return response;
+        }
+
+        public ServiceResponse LogonStatus()
+        {
+            ServiceResponse response = new ServiceResponse(false);
+
+            List<CriteriaParam> param = new List<CriteriaParam>();
+
+            param.Add(new CriteriaParam() { FieldName = ServiceConstants.LOGONSTATUS, Operator = Operators.Equals, Value = (int)SEnvironment.Constants.LogonStatus.LoggedOn });
+
+            List<UserSession> userSession = UserSessionDao.GetByCriteria(param).ToList();
+
+            if (userSession != null && userSession.Count > 0)
+            {
+                response.IsSuccess = true;
+
+                response.Data = SEnvironment.Constants.LogonStatus.LoggedOn;
+            }
+            else
+            {
+                response.IsSuccess = true;
+
+                response.Data = SEnvironment.Constants.LogonStatus.LoggedOff;
+            }
+
+            return response;
+        }
+
+        public ServiceResponse LastLoggedOnUser()
+        {
+            ServiceResponse response = new ServiceResponse(false);
+
+            List<CriteriaParam> param = new List<CriteriaParam>();
+
+            param.Add(new CriteriaParam() { FieldName = ServiceConstants.LOGONSTATUS, Operator = Operators.Equals, Value = (int)SEnvironment.Constants.LogonStatus.LoggedOn });
+
+            List<UserSession> userSession = UserSessionDao.GetByCriteria(param).ToList();
+
+            if (userSession != null && userSession.Count > 0)
+            {
+                response.IsSuccess = true;
+
+                UserSessionDto userSessionDto = Mapper.Map<UserSessionDto>(userSession.LastOrDefault());
+
+                response.Data = userSessionDto;
+            }
+            else
+            {
+                ServiceException exception = new ServiceException(ErrorType.ErrorText(ErrorCode.SESSIONSERVICE_LAST_LOGGEDON_USER_DOESNT_EXIST));
+                exception.ErrorCode = ErrorCode.SESSIONSERVICE_LAST_LOGGEDON_USER_DOESNT_EXIST;
 
                 throw exception;
             }

@@ -10,6 +10,8 @@ namespace Siska.Core
     [Serializable]
     public class ServiceException : Exception
     {
+        public string ErrorCode { get; set; }
+
         public ServiceException()
         {
         }

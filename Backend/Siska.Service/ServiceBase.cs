@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using Siska.Data.Dto.Pos;
-using Siska.Data.Model.Pos;
-
-namespace Siska.Service
+﻿namespace Siska.Service
 {
+    using AutoMapper;
+    using Siska.Core;
+    using Siska.Data.Dto.Pos;
+    using Siska.Data.Model.Pos;
+
     public abstract class ServiceBase
     {
+        public ErrorType ErrorType { get; set; }
+
         public ServiceBase()
         {
             InitiateMapper();
+            ErrorType = new ErrorType();
+            ErrorType.Initialize();
         }
 
         private void InitiateMapper()

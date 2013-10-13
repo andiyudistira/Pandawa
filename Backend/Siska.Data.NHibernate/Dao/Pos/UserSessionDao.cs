@@ -9,6 +9,7 @@ using Siska.Data.Model.Pos;
 using NHibernate.Cfg;
 using FluentNHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
+using NHibernate.Transform;
 
 namespace Siska.Data.NHibernate.Dao.Pos
 {
@@ -36,7 +37,13 @@ namespace Siska.Data.NHibernate.Dao.Pos
         [Transaction]
         public IList<UserSession> GetByCriteria(List<CriteriaParam> criteriaParam)
         {
-            return CreateCriteria<UserSession>(criteriaParam); 
+            ICriteria criteria = CreateCriteriaOnly<UserSession>(criteriaParam)
+                                    .SetFetchMode("User", FetchMode.Eager)
+                                    .SetFetchMode("User.Roles", FetchMode.Eager)
+                                    .SetFetchMode("User.UserSessions", FetchMode.Eager)
+                                    .SetResultTransformer(new DistinctRootEntityResultTransformer());
+
+            return criteria.List<UserSession>();
         }
 
         [Transaction]

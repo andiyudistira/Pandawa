@@ -15,6 +15,13 @@
              d:DesignHeight="300" d:DesignWidth="300"
              DataContext="{Binding [LoginViewModel], Source={StaticResource ViewModelLocator}}">
     <Grid Style="{StaticResource ContentRoot}">
+        <i:Interaction.Triggers>
+            <i:EventTrigger EventName="Loaded">
+                <cmd:EventToCommand Command="{Binding PageLoaded, Mode=OneWay}" />
+                <!--MustToggleIsEnabledValue="True"/>-->
+            </i:EventTrigger>
+        </i:Interaction.Triggers>
+        
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
             <RowDefinition Height="10" />

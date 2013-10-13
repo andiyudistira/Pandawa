@@ -28,6 +28,8 @@
         
         public RelayCommand<string> LogInClick { get; set; }
 
+        public RelayCommand<string> PageLoaded { get; set; }
+
         public bool CanSignIn
         {
             get { return canSignIn; }
@@ -78,6 +80,7 @@
             : base(appSession, dialogManager)
         {
             LogInClick = new RelayCommand<string>(DoLogin);
+            PageLoaded = new RelayCommand<string>(LoginPageLoaded);
 
             ResxLocalizationProvider.Instance.UpdateCultureList("PandawaPOS", "PandawaUI");
             LocalizeDictionary.Instance.PropertyChanged += Instance_PropertyChanged;
@@ -86,6 +89,7 @@
             canSignIn = false;
 
             AppSessionManager.UserAuthenticated += AppSessionManager_UserAuthenticated;
+            AppSessionManager.LogonInitialCompleted += AppSessionManager_LogonInitialCompleted;
         }
         #endregion
 
@@ -94,6 +98,21 @@
         {
             ShowProgressBar = Visibility.Collapsed;
             Messenger.Default.Send(new LoginMessage());
+        }
+
+        void AppSessionManager_LogonInitialCompleted(object sender, EventArgs e)
+        {
+            if (AppSessionManager.AuthUser != null)
+            {
+                UserName = AppSessionManager.AuthUser.UserName;
+            }
+            ShowProgressBar = Visibility.Collapsed;
+        }
+
+        private void LoginPageLoaded(string a)
+        {
+            ShowProgressBar = Visibility.Visible;
+            AppSessionManager.CheckLoginStatus();
         }
 
         private void DoLogin(string a)

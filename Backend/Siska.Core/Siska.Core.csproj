@@ -64,7 +64,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DaoException.cs" />
-    <Compile Include="Environment.cs" />
+    <Compile Include="SEnvironment.cs" />
+    <Compile Include="ErrorCode.cs" />
+    <Compile Include="ErrorType.cs" />
     <Compile Include="Operators.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ServiceConstants.cs" />

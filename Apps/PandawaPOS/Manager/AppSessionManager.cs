@@ -12,9 +12,16 @@
     public class AppSessionManager : IAppSessionManager
     {
         private BackgroundWorker loginWorker = new BackgroundWorker();
+        private BackgroundWorker initialLoginWorker = new BackgroundWorker();
+
         private UserDto authUser;
         private bool isAuthenticated;
+        private bool isLoginInitialised;
         private int wrongAuthCount;
+        
+        public Guid SessionId { get; set; }
+
+        public SEnvironment.Constants.LogonStatus LogonStatus { get; set; }
 
         public UserDto AuthUser 
         {
@@ -41,6 +48,21 @@
             }
         }
 
+        public bool IsLoginInitialised
+        {
+            get { return isLoginInitialised; }
+            set
+            {
+                isLoginInitialised = value;
+                this.OnPropertyChanged("IsLoginInitialised");
+
+                if (value && LogonInitialCompleted != null)
+                {
+                    LogonInitialCompleted(AuthUser, null);
+                }
+            }
+        }
+
         public int WrongAuthCount 
         {
             get { return wrongAuthCount; }
@@ -53,6 +75,7 @@
 
         private ISessionService SessionService;
         public event EventHandler UserAuthenticated;
+        public event EventHandler LogonInitialCompleted;
 
         public AppSessionManager(ISessionService sessionService)
         {
@@ -61,10 +84,58 @@
             loginWorker.DoWork += loginWorker_DoWork;
             loginWorker.RunWorkerCompleted += loginWorker_RunWorkerCompleted;
 
+            initialLoginWorker.DoWork += initialLoginWorker_DoWork;
+            initialLoginWorker.RunWorkerCompleted += initialLoginWorker_RunWorkerCompleted;
+
             AuthUser = new UserDto();
             wrongAuthCount = 0;
 
             SessionService = sessionService;
+        }
+
+        void initialLoginWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
+        {
+            IsLoginInitialised = true;
+        }
+
+        void initialLoginWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            ServiceResponse response = SessionService.LogonStatus();
+
+            if (response != null && response.IsSuccess)
+            {
+                SEnvironment.Constants.LogonStatus result = (SEnvironment.Constants.LogonStatus)response.Data;
+
+                if (result == SEnvironment.Constants.LogonStatus.LoggedOn)
+                {
+                    response = SessionService.LastLoggedOnUser();
+
+                    if (response.IsSuccess)
+                    {                        
+                        UserSessionDto userSession = response.Data as UserSessionDto;
+                        AuthUser = userSession.User;
+                        SessionId = userSession.SessionId;
+
+                        if (AuthUser != null)
+                        {
+                            LogonStatus = SEnvironment.Constants.LogonStatus.Locked;
+                            e.Result = true;
+                        }
+                        else
+                        {
+                            e.Result = false;
+                        }
+                    }
+                    else
+                    {
+                        e.Result = false;
+                    }
+                }
+            }
+            else
+            {
+                e.Result = false;
+            }
         }
 
         private void loginWorker_RunWorkerCompleted(object sender, RunWorkerCompletedEventArgs e)
@@ -120,6 +191,11 @@
             authUser.Password = password;
 
             loginWorker.RunWorkerAsync();
+        }
+
+        public void CheckLoginStatus()
+        {
+            initialLoginWorker.RunWorkerAsync();
         }
 
         /// <summary>
