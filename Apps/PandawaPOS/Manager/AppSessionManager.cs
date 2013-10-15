@@ -9,10 +9,10 @@
     using Siska.Service;
     using Siska.Wpf.Manager;
 
-    public class AppSessionManager : IAppSessionManager
+    public class AppSessionManager : IAppSessionManager, IDisposable
     {
-        private BackgroundWorker loginWorker = new BackgroundWorker();
-        private BackgroundWorker initialLoginWorker = new BackgroundWorker();
+        private BackgroundWorker loginWorker;
+        private BackgroundWorker initialLoginWorker;
 
         private UserDto authUser;
         private bool isAuthenticated;
@@ -79,7 +79,8 @@
 
         public AppSessionManager(ISessionService sessionService)
         {
-            IsAuthenticated = false;
+            loginWorker = new BackgroundWorker();
+            initialLoginWorker = new BackgroundWorker();
 
             loginWorker.DoWork += loginWorker_DoWork;
             loginWorker.RunWorkerCompleted += loginWorker_RunWorkerCompleted;
@@ -213,6 +214,31 @@
             if (handler != null)
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
+            }
+        }
+
+        public void Dispose()
+        {
+            this.Dispose(true);
+            GC.SuppressFinalize(this);
+        }
+
+        protected virtual void Dispose(bool disposeBool)
+        {
+            if (disposeBool)
+            {
+                lock (this)
+                {
+                    if (loginWorker != null)
+                    {
+                        loginWorker.Dispose();
+                    }
+
+                    if (initialLoginWorker != null)
+                    {
+                        initialLoginWorker.Dispose();
+                    }
+                }
             }
         }
     }

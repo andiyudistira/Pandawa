@@ -1,19 +1,19 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using Castle.Transactions;
-using NHibernate;
-using NHibernate.Criterion;
-using NHibernate.Transform;
-using Siska.Core;
-using Siska.Data.Dao;
-using Siska.Data.Model.Pos;
-using NHibernate.Cfg;
-using FluentNHibernate.Cfg;
-using NHibernate.Tool.hbm2ddl;
-
-namespace Siska.Data.NHibernate.Dao.Pos
+﻿namespace Siska.Data.Dao.Pos
 {
+    using System;
+    using System.Collections;
+    using System.Collections.Generic;
+    using Castle.Transactions;
+    using NHibernate;
+    using NHibernate.Criterion;
+    using NHibernate.Transform;
+    using Siska.Core;
+    using Siska.Data.Dao;
+    using Siska.Data.Model.Pos;
+    using NHibernate.Cfg;
+    using FluentNHibernate.Cfg;
+    using NHibernate.Tool.hbm2ddl;
+
     public class UserDao : HibernateDao, IUserDao
     {
         public UserDao(Func<ISession> getSession)

@@ -28,7 +28,7 @@
             var cfg = new Configuration().Configure();                           
 
             return Fluently.Configure(cfg)
-                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Siska.Data.NHibernate.Dao.HibernateDao>());
+                .Mappings(m => m.FluentMappings.AddFromAssemblyOf<Siska.Data.Dao.HibernateDao>());
         }
 
         public void Registered(NHibernate.ISessionFactory factory)

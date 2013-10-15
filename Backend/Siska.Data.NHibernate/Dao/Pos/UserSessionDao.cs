@@ -11,7 +11,7 @@ using FluentNHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 using NHibernate.Transform;
 
-namespace Siska.Data.NHibernate.Dao.Pos
+namespace Siska.Data.Dao.Pos
 {
     public class UserSessionDao : HibernateDao, IUserSessionDao
     {

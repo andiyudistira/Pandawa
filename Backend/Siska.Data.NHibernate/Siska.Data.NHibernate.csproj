@@ -8,7 +8,7 @@
     <ProjectGuid>{1069B9D4-EF88-4D2F-9724-57601B2ECBAB}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Siska.Data.NHibernate</RootNamespace>
+    <RootNamespace>Siska.Data</RootNamespace>
     <AssemblyName>Siska.Data.NHibernate</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>

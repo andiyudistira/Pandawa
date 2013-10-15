@@ -11,7 +11,7 @@ using NHibernate.Cfg;
 using FluentNHibernate.Cfg;
 using NHibernate.Tool.hbm2ddl;
 
-namespace Siska.Data.NHibernate.Dao.Pos
+namespace Siska.Data.Dao.Pos
 {
     public class RoleDao : HibernateDao, IRoleDao
     {

@@ -4,7 +4,7 @@ using NHibernate.Cfg;
 using Castle.Windsor;
 using Castle.MicroKernel.Registration;
 using System.IO;
-using Siska.Data.NHibernate;
+using Siska.Data;
 using Castle.Facilities.NHibernate;
 using NLog;
 using Castle.Facilities.AutoTx;
@@ -13,7 +13,7 @@ using Siska.Data;
 using Castle.Core;
 using NHibernate.Tool.hbm2ddl;
 using NHibernate.Context;
-using Siska.Data.NHibernate.Dao.Pos;
+using Siska.Data.Dao.Pos;
 using Siska.Data.Model.Pos;
 using System.Collections.Generic;
 

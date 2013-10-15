@@ -5,7 +5,7 @@ using NHibernate.Criterion;
 using Siska.Core;
 using System.Collections;
 
-namespace Siska.Data.NHibernate.Dao
+namespace Siska.Data.Dao
 {
     /// <summary>
     /// Base class for data access operations.

@@ -26,7 +26,8 @@ namespace Siska.Core
       SmallerThan = 8,
       NotIn = 9,
       In = 10,
-      Between = 11
+      Between = 11,
+      Like = 12
    }
 
    public class CriteriaParam

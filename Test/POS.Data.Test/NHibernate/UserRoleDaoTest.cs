@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Siska.Core;
 using Siska.Data.Dao;
 using Siska.Data.Model.Pos;
-using Siska.Data.NHibernate.Dao.Pos;
+using Siska.Data.Dao.Pos;
 
 namespace POS.Data.Test
 {
