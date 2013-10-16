@@ -8,6 +8,7 @@ using Siska.Data.Dao;
 using Siska.Data.Model.Pos;
 using System.Linq;
 using NDatabase.Data.Test.NDatabaseHelper;
+using Siska.Core;
 
 namespace NDatabase.Data.Test
 {
@@ -50,6 +51,17 @@ namespace NDatabase.Data.Test
             string a = RoleDao.Add(rl);
 
             var test = RoleDao.GetAll();
+        }
+
+        [TestMethod]
+        public void GetByCriteriaTest()
+        {
+            List<CriteriaParam> param = new List<CriteriaParam>();
+
+            param.Add(new CriteriaParam() { FieldName = "RoleName", Operator = Operators.Equals, Value = "Admin" });
+
+            IList<Role> testCriteria = RoleDao.GetByCriteria(param);
+
         }
     }
 }

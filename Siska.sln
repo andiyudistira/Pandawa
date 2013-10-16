@@ -65,6 +65,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Lib", "Lib", "{5E75E69F-3E6
 		lib\Rhino.ServiceBus.dll = lib\Rhino.ServiceBus.dll
 		lib\System.Data.SQLite.dll = lib\System.Data.SQLite.dll
 		lib\System.Data.SQLite.Linq.dll = lib\System.Data.SQLite.Linq.dll
+		lib\System.Linq.Dynamic.dll = lib\System.Linq.Dynamic.dll
 		lib\Wintellect.Threading.dll = lib\Wintellect.Threading.dll
 		lib\WPFLocalizeExtension.dll = lib\WPFLocalizeExtension.dll
 		lib\XAMLMarkupExtensions.dll = lib\XAMLMarkupExtensions.dll

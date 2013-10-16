@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Siska.Core;
 using Siska.Data.Dao;
+using Siska.Data.Model.Pos;
 
 namespace NDatabase.Data.Test
 {
@@ -17,7 +18,7 @@ namespace NDatabase.Data.Test
             param.Add(new CriteriaParam() { FieldName = "UserName", Operator = Operators.Equals, Value = "andi" });
             param.Add(new CriteriaParam() { FieldName = "Password", Operator = Operators.Equals, Value = "testing" });
 
-            string queryFilter = this.CreateCriteria(param);
+            string queryFilter = this.CreateCriteria<Role>(param);
 
             Assert.IsNotNull(queryFilter);
         }

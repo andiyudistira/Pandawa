@@ -9,7 +9,7 @@
 
     public abstract class BaseDao
     {
-        protected string CreateCriteria(List<CriteriaParam> itemParams)
+        protected string CreateCriteria<T>(List<CriteriaParam> itemParams)
         {
             StringBuilder criteriaResult = new StringBuilder(1000);
 
@@ -23,7 +23,7 @@
 
                 if (item.Value.GetType().Equals(typeof(string)))
                 {
-                    item.Value = string.Format("{0}{1}{2}", "'", item.Value, "'");
+                    item.Value = string.Format("{0}{1}{2}", "\"", item.Value, "\"");
                 }
 
                 if (item.Operator == Operators.Equals)

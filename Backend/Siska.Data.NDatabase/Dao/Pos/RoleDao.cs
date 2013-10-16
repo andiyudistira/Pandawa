@@ -2,6 +2,7 @@
 {
     using System;
     using System.Linq;
+    using System.Linq.Dynamic;
     using System.Collections;
     using System.Collections.Generic;
     using Siska.Core;
@@ -47,12 +48,22 @@
 
         public IList<Role> GetByCriteria(List<CriteriaParam> criteriaParam)
         {
+            string queryFilter = this.CreateCriteria<Role>(criteriaParam);
+
+            IList<Role> result;
+
+            using (var odb = OdbFactory.OpenLast())
+            {
+                //var expression = System.Linq.Dynamic.DynamicExpression.Parse(typeof(IQueryable<Role>), queryFilter, null);
+                result = odb.QueryAndExecute<Role>().AsQueryable().Where(queryFilter).ToList();
+            }
             //ICriteria criteria = CreateCriteriaOnly<Role>(criteriaParam)
             //                        .SetFetchMode("Users", FetchMode.Eager)
             //                        .SetResultTransformer(new DistinctRootEntityResultTransformer());
 
             //return criteria.List<Role>();
-            return null;
+
+            return result;
         }
 
         public string Add(Role entity)
