@@ -9,6 +9,7 @@
     using Siska.Data.Dao;
     using Siska.Data.Model.Pos;
     using NDatabase;
+    using NDatabase.Api.Query;
 
     public class RoleDao : BaseDao, IRoleDao
     {
@@ -48,20 +49,16 @@
 
         public IList<Role> GetByCriteria(List<CriteriaParam> criteriaParam)
         {
-            string queryFilter = this.CreateCriteria<Role>(criteriaParam);
-
             IList<Role> result;
 
             using (var odb = OdbFactory.OpenLast())
             {
-                //var expression = System.Linq.Dynamic.DynamicExpression.Parse(typeof(IQueryable<Role>), queryFilter, null);
-                result = odb.QueryAndExecute<Role>().AsQueryable().Where(queryFilter).ToList();
-            }
-            //ICriteria criteria = CreateCriteriaOnly<Role>(criteriaParam)
-            //                        .SetFetchMode("Users", FetchMode.Eager)
-            //                        .SetResultTransformer(new DistinctRootEntityResultTransformer());
+                IQuery query = odb.Query<Role>();
 
-            //return criteria.List<Role>();
+                query = NDBSodaQueryCriteria(criteriaParam, query);
+
+                result = query.Execute<Role>().ToList();
+            }
 
             return result;
         }
