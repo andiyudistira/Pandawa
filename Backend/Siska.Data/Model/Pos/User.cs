@@ -1,10 +1,8 @@
-using System;
-using System.Collections.Generic;
-using System.Text;
-using Iesi.Collections.Generic;
-
 namespace Siska.Data.Model.Pos {
-    
+
+    using System.Collections.Generic;
+    using Iesi.Collections.Generic;
+
     public class User {
         public const string USER_MODEL_NAME = "User";
         public const string USER_TABLE_NAME = "Users";

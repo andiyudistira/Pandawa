@@ -1,10 +1,7 @@
-using System;
-using System.Text;
-using System.Collections.Generic;
-
-
 namespace Siska.Data.Model.Pos {
-    
+
+    using System;
+
     public class UserSession {
         public const string USERSESSION_MODEL_NAME = "User";
         public const string USERSESSION_TABLE_NAME = "Users";

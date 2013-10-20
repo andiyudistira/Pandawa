@@ -1,10 +1,8 @@
-using System;
-using System.Text;
-using System.Collections.Generic;
-using Iesi.Collections.Generic;
-
 namespace Siska.Data.Dto.Pos {
-    
+
+    using System.Collections.Generic;
+    using Iesi.Collections.Generic;
+
     public class RoleDto {
         public int RoleId { get; set; }
         public string RoleName { get; set; }
@@ -15,6 +13,8 @@ namespace Siska.Data.Dto.Pos {
         public bool RecordStatus { get; set; }
 
         public ICollection<UserDto> Users { get; set; }
+
+        public object Tag { get; set; }
 
         public RoleDto()
         {

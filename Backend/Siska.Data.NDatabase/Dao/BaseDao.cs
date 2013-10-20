@@ -19,54 +19,137 @@
             {
                 if (item.Operator == Operators.Equals)
                 {
-                    query.Descend(item.FieldName).Constrain(item.Value).Equal();
+                    if (i > 0)
+                    {
+                        query.Descend(item.FieldName).Constrain(item.Value).Equal();
+                    }
+                    else
+                    {
+                        var q = query.Constrain(null);
+                        query.Descend(item.FieldName).Constrain(item.Value).Equal().And(q);
+                    }
                 }
 
                 if (item.Operator == Operators.In)
                 {
-                    query.Descend(string.Format("{0}{1}", "_", item.FieldName.ToLower())).Constrain(item.Value).Contains();
+                    if (i > 0)
+                    {
+                        query.Descend(item.FieldName).Constrain(item.Value).Contains();
+                    }
+                    else
+                    {
+                        var q = query.Constrain(null);
+                        query.Descend(item.FieldName).Constrain(item.Value).Contains().And(q);
+                    }
                 }
 
                 if (item.Operator == Operators.Between)
                 {
-                    var queryGt = query.Descend(string.Format("{0}{1}", "_", item.FieldName.ToLower())).Constrain(item.Value).SizeGt();
-                    query.Descend(string.Format("{0}{1}", "_", item.FieldName.ToLower())).Constrain(item.Value).SizeLt().And(queryGt);
+                    if (i > 0)
+                    {
+                        var queryGt = query.Descend(item.FieldName).Constrain(item.Value).SizeGt();
+                        query.Descend(item.FieldName).Constrain(item.Value).SizeLt().And(queryGt);
+                    }
+                    else
+                    {
+                        var q = query.Constrain(null);
+                        var queryGt = query.Descend(item.FieldName).Constrain(item.Value).SizeGt();
+                        query.Descend(item.FieldName).Constrain(item.Value).SizeLt().And(queryGt).And(q);
+                    }
                 }
 
                 if (item.Operator == Operators.Like)
                 {
-                    query.Descend(string.Format("{0}{1}", "_", item.FieldName.ToLower())).Constrain(item.Value).Like();
+                    if (i > 0)
+                    {
+                        query.Descend(item.FieldName).Constrain(item.Value).Like();
+                    }
+                    else
+                    {
+                        var q = query.Constrain(null);
+                        query.Descend(item.FieldName).Constrain(item.Value).Like().And(q);
+                    }
                 }
 
                 if (item.Operator == Operators.NotEquals)
                 {
-                    query.Descend(string.Format("{0}{1}", "_", item.FieldName.ToLower())).Constrain(item.Value).Not().Equal();
+                    if (i > 0)
+                    {
+                        query.Descend(item.FieldName).Constrain(item.Value).Not().Equal();
+                    }
+                    else
+                    {
+                        var q = query.Constrain(null);
+                        query.Descend(item.FieldName).Constrain(item.Value).Not().Equal().And(q);
+                    }
                 }
 
                 if (item.Operator == Operators.NotIn)
                 {
-                    query.Descend(string.Format("{0}{1}", "_", item.FieldName.ToLower())).Constrain(item.Value).Not().Contains();
+                    if (i > 0)
+                    {
+                        query.Descend(item.FieldName).Constrain(item.Value).Not().Contains();
+                    }
+                    else
+                    {
+                        var q = query.Constrain(null);
+                        query.Descend(item.FieldName).Constrain(item.Value).Not().Contains().And(q);
+                    }
                 }
 
                 if (item.Operator == Operators.Greater)
                 {
-                    query.Descend(string.Format("{0}{1}", "_", item.FieldName.ToLower())).Constrain(item.Value).SizeGe();
+                    if (i > 0)
+                    {
+                        query.Descend(item.FieldName).Constrain(item.Value).SizeGe();
+                    }
+                    else
+                    {
+                        var q = query.Constrain(null);
+                        query.Descend(item.FieldName).Constrain(item.Value).SizeGe().And(q);
+                    }
                 }
 
                 if (item.Operator == Operators.Greater)
                 {
-                    query.Descend(string.Format("{0}{1}", "_", item.FieldName.ToLower())).Constrain(item.Value).SizeGt();
+                    if (i > 0)
+                    {
+                        query.Descend(item.FieldName).Constrain(item.Value).SizeGt();
+                    }
+                    else
+                    {
+                        var q = query.Constrain(null);
+                        query.Descend(item.FieldName).Constrain(item.Value).SizeGt().And(q);
+                    }
                 }
 
                 if (item.Operator == Operators.Smaller)
                 {
-                    query.Descend(string.Format("{0}{1}", "_", item.FieldName.ToLower())).Constrain(item.Value).SizeLe();
+                    if (i > 0)
+                    {
+                        query.Descend(item.FieldName).Constrain(item.Value).SizeLe();
+                    }
+                    else
+                    {
+                        var q = query.Constrain(null);
+                        query.Descend(item.FieldName).Constrain(item.Value).SizeLe().And(q);
+                    }
                 }
 
                 if (item.Operator == Operators.SmallerThan)
                 {
-                    query.Descend(string.Format("{0}{1}", "_", item.FieldName.ToLower())).Constrain(item.Value).SizeLt();
+                    if (i > 0)
+                    {
+                        query.Descend(item.FieldName).Constrain(item.Value).SizeLt();
+                    }
+                    else
+                    {
+                        var q = query.Constrain(null);
+                        query.Descend(item.FieldName).Constrain(item.Value).SizeLt().And(q);
+                    }
                 }
+
+                i++;
             }
 
             return query;

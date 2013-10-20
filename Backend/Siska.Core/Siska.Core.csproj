@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DaoException.cs" />
+    <Compile Include="DBException.cs" />
     <Compile Include="SEnvironment.cs" />
     <Compile Include="ErrorCode.cs" />
     <Compile Include="ErrorType.cs" />

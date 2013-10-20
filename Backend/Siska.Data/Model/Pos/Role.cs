@@ -1,9 +1,7 @@
-using System;
-using System.Text;
-using System.Collections.Generic;
-using Iesi.Collections.Generic;
-
 namespace Siska.Data.Model.Pos {
+
+    using System.Collections.Generic;
+    using Iesi.Collections.Generic;
     
     public class Role {
         public const string ROLE_MODEL_NAME = "Role";

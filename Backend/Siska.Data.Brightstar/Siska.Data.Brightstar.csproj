@@ -1,0 +1,110 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{6546A103-FFE0-4AB6-8C1F-4E256B9293E1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Siska.Data</RootNamespace>
+    <AssemblyName>Siska.Data.Brightstar</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BrightstarDB">
+      <HintPath>..\..\lib\BrightstarDB\BrightstarDB.dll</HintPath>
+    </Reference>
+    <Reference Include="dotNetRDF">
+      <HintPath>..\..\lib\BrightstarDB\dotNetRDF.dll</HintPath>
+    </Reference>
+    <Reference Include="HtmlAgilityPack">
+      <HintPath>..\..\lib\BrightstarDB\HtmlAgilityPack.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\..\lib\BrightstarDB\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Remotion.Linq">
+      <HintPath>..\..\lib\BrightstarDB\Remotion.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Linq.Dynamic">
+      <HintPath>..\..\lib\System.Linq.Dynamic.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="VDS.Common">
+      <HintPath>..\..\lib\BrightstarDB\VDS.Common.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BModel\Pos\IRole.cs" />
+    <Compile Include="BModel\Pos\IUser.cs" />
+    <Compile Include="BModel\Pos\IUserSession.cs" />
+    <Compile Include="BDao\BaseDao.cs" />
+    <Compile Include="BDao\BsContext.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BsContext.tt</DependentUpon>
+    </Compile>
+    <Compile Include="BDao\Pos\IRoleDao.cs" />
+    <Compile Include="BDao\Pos\IUserDao.cs" />
+    <Compile Include="BDao\Pos\IUserSessionDao.cs" />
+    <Compile Include="BDao\Pos\RoleDao.cs" />
+    <Compile Include="BDao\Pos\UserDao.cs" />
+    <Compile Include="BDao\Pos\UserSessionDao.cs" />
+    <Compile Include="ISiskaDB.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SiskaDB.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Siska.Core\Siska.Core.csproj">
+      <Project>{42de2e81-81f4-4792-bb4d-2924f935f659}</Project>
+      <Name>Siska.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Siska.Data\Siska.Data.csproj">
+      <Project>{5f8b96fa-7af8-49dc-8cb6-005c6781273a}</Project>
+      <Name>Siska.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="BDao\BsContext.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>BsContext.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,10 +1,7 @@
-using System;
-using System.Text;
-using System.Collections.Generic;
-
-
 namespace Siska.Data.Dto.Pos {
-    
+
+    using System;
+
     public class UserSessionDto {
         public int UserSessionId { get; set; }
         public Guid SessionId { get; set; }
@@ -12,5 +9,6 @@ namespace Siska.Data.Dto.Pos {
         public DateTime LoginDate { get; set; }
         public System.Nullable<System.DateTime> LogOffDate { get; set; }
         public int LoginStatus { get; set; }
+        public object Tag { get; set; }
     }
 }
