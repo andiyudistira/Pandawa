@@ -1,19 +1,30 @@
 ﻿namespace Siska.Data.Dao.Pos
 {
     using System;
+    using System.Linq;
     using System.Collections;
     using System.Collections.Generic;
+    using BrightstarDB.EntityFramework;
     using Siska.Core;
     using Siska.Data.BDao;
     using Siska.Data.BModel.Pos;
+    using System.Linq.Expressions;
 
     public class UserDao : IUserDao
     {
-        private ISiskaDB db;
+        ISiskaDB db;
+
+        IEntitySet<IUser> users;
+
+        public IEntitySet<IUser> Users
+        {
+            get { return users; }
+        }
 
         public UserDao(ISiskaDB siskaDB)
 		{
             db = siskaDB;
+            users = db.BsContext.Users;
 		}
 
         public IUser CreateNew()
@@ -23,77 +34,81 @@
 
         public IUser Get(string id)
         {
-            return null;
-        }
-        
-        public IList<IUser> GetAll()
-        {
-            return null;
+            IUser result;
+
+            result = (from a in db.BsContext.Users
+                            where a.Id.Equals(id)
+                            select a).FirstOrDefault();
+
+            return result;
         }
 
-        public IList<IUser> GetByCriteria(List<CriteriaParam> criteriaParam)
+        public IList<IUser> GetAll()
         {
-            return null;
+            IList<IUser> result;
+
+            result = (from a in db.BsContext.Users
+                        select a).ToList();
+
+            return result;
+        }
+
+        public IList<IUser> GetByCriteria(Expression expression)
+        {
+            IList<IUser> result;
+
+            result = db.BsContext.Users.Provider.CreateQuery<IUser>(expression).ToList();
+
+            return result;
         }
 
         public string Add(IUser entity)
         {
-            return string.Empty;
+            db.BsContext.Users.Add(entity);
+            db.BsContext.SaveChanges();
+            
+            return entity.Id;
         }
-        
+
         public void Update(IUser entity)
         {
-            
+            db.BsContext.Users.Add(entity);
+            db.BsContext.SaveChanges();
         }
 
         public IList<IUser> GetAll(int page, int maxRow, out int numberOfPages)
         {
             numberOfPages = 0;
 
-            //ICriteria criteria = getSession().CreateCriteria<User>()
-            //                        .SetFetchMode("Roles", FetchMode.Eager)
-            //                        .SetFetchMode("UserSessions", FetchMode.Eager)
-            //                        .SetResultTransformer(new DistinctRootEntityResultTransformer());
+            IList<IUser> result = db.BsContext.Users.Skip(page * maxRow).Take(maxRow).ToList();
 
-            //criteria.SetFirstResult(page * maxRow);
-            //criteria.SetMaxResults(maxRow);
+            int totalRow = db.BsContext.Users.Count();            
 
-            //int totalRow = getSession().CreateCriteria<User>().List().Count;            
+            double totalPages = Math.Round(Convert.ToDouble(Convert.ToDouble(totalRow) / Convert.ToDouble(maxRow)), MidpointRounding.AwayFromZero);
 
-            //double totalPages = Math.Round(Convert.ToDouble(Convert.ToDouble(totalRow) / Convert.ToDouble(maxRow)), MidpointRounding.AwayFromZero);
+            numberOfPages = int.Parse(totalPages.ToString());            
 
-            //numberOfPages = int.Parse(totalPages.ToString());
-
-            //return criteria.List<User>();            
-
-            return null;
+            return result;
         }
 
-        public IList<IUser> GetByCriteriaWithPaging(int page, int maxRow, out int numberOfPages, List<CriteriaParam> Param)
+        public IList<IUser> GetByCriteriaWithPaging(int page, int maxRow, out int numberOfPages, Expression expression)
         {
             numberOfPages = 0;
 
-            //ICriteria criteria = CreateCriteriaOnly<User>(Param)
-            //                        .SetFetchMode("Roles", FetchMode.Eager)
-            //                        .SetFetchMode("UserSessions", FetchMode.Eager)
-            //                        .SetResultTransformer(new DistinctRootEntityResultTransformer());
+            IList<IUser> result = db.BsContext.Users.Provider.CreateQuery<IUser>(expression).Skip(page * maxRow).Take(maxRow).ToList();
 
-            //criteria.SetFirstResult(page * maxRow);
-            //criteria.SetMaxResults(maxRow);
+            int totalRow = db.BsContext.Users.Count();
 
-            //int totalRow = getSession().CreateCriteria<User>().List().Count;
+            double totalPages = Math.Round(Convert.ToDouble(Convert.ToDouble(totalRow) / Convert.ToDouble(maxRow)), MidpointRounding.AwayFromZero);
 
-            //double totalPages = Math.Round(Convert.ToDouble(Convert.ToDouble(totalRow) / Convert.ToDouble(maxRow)), MidpointRounding.AwayFromZero);
+            numberOfPages = int.Parse(totalPages.ToString());
 
-            //numberOfPages = int.Parse(totalPages.ToString());
-
-            //return criteria.List<User>(); 
-            return null;
+            return result;
         }
 
         public void Delete(IUser entity)
         {
-            //getSession().Delete(entity);
+            db.BsContext.DeleteObject(entity);
         }
     }
 }

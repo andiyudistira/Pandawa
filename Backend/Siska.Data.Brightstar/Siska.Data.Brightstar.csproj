@@ -46,6 +46,7 @@
       <HintPath>..\..\lib\BrightstarDB\Remotion.Linq.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Linq.Dynamic">
       <HintPath>..\..\lib\System.Linq.Dynamic.dll</HintPath>
@@ -60,6 +61,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BDao\IDao.cs" />
+    <Compile Include="BDao\ISupportsDelete.cs" />
+    <Compile Include="BDao\ISupportsPaging.cs" />
+    <Compile Include="BDao\ISupportsSave.cs" />
     <Compile Include="BModel\Pos\IRole.cs" />
     <Compile Include="BModel\Pos\IUser.cs" />
     <Compile Include="BModel\Pos\IUserSession.cs" />

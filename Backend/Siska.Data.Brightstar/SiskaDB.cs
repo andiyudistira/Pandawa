@@ -38,7 +38,16 @@
 
         private void CreateOrOpenDB(string dbPath)
         {
-            var storeName = "SiskaDB";
+            string storeName = string.Empty;
+
+            if (System.Configuration.ConfigurationManager.AppSettings["Environment"].ToString().Equals("Test"))
+            {
+                storeName = "SiskaDB_Test_" + Guid.NewGuid().ToString();
+            }
+            else
+            {
+                storeName = "SiskaDB";
+            }
 
             string connectionString =
                 string.Format(@"Type=embedded;storesDirectory={0};StoreName={1};", dbPath, storeName);

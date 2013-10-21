@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Siska.Data.Dao;
-using Siska.Data.BModel.Pos;
-
-namespace Siska.Data.BDao
+﻿namespace Siska.Data.BDao
 {
+    using Siska.Data.BModel.Pos;
+    using BrightstarDB.EntityFramework;
+
     public interface IUserSessionDao : IDao<IUserSession, string>, ISupportsSave<IUserSession, string>,
              ISupportsPaging<IUserSession>, ISupportsDelete<IUserSession>
     {
+        IEntitySet<IUserSession> UserSessions { get; }
+
+        IUserSession CreateNew();
     }
 }

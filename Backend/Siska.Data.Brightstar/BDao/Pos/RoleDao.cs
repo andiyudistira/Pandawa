@@ -2,20 +2,28 @@
 {
     using System;
     using System.Linq;
-    using System.Linq.Dynamic;
     using System.Collections;
     using System.Collections.Generic;
-    using Siska.Core;
     using Siska.Data.BDao;
     using Siska.Data.BModel.Pos;
+    using BrightstarDB.EntityFramework;
+    using System.Linq.Expressions;
 
     public class RoleDao : BaseDao, IRoleDao
     {
         ISiskaDB db;
 
+        IEntitySet<IRole> roles;
+
+        public IEntitySet<IRole> Roles
+        {
+            get { return roles; }
+        }
+
         public RoleDao(ISiskaDB siskaDB)
 		{
             db = siskaDB;
+            roles = db.BsContext.Roles;
 		}
 
         public IRole CreateNew()
@@ -44,20 +52,13 @@
             return roles;
         }
 
-        public IList<IRole> GetByCriteria(List<CriteriaParam> criteriaParam)
+        public IList<IRole> GetByCriteria(Expression expression)
         {
             IList<IRole> result;
 
-            //using (var odb = OdbFactory.OpenLast())
-            //{
-            //    IQuery query = odb.Query<Role>();
+            result = db.BsContext.Roles.Provider.CreateQuery<IRole>(expression).ToList();
 
-            //    query = NDBSodaQueryCriteria(criteriaParam, query);
-
-            //    result = query.Execute<Role>().ToList();
-            //}
-
-            return null;
+            return result;
         }
 
         public string Add(IRole entity)
@@ -72,57 +73,41 @@
         {
             db.BsContext.Roles.Add(entity);
             db.BsContext.SaveChanges();
-
-            //getSession().SaveOrUpdate(entity);
         }
 
         public IList<IRole> GetAll(int page, int maxRow, out int numberOfPages)
         {
             numberOfPages = 0;
 
-            //ICriteria criteria = getSession().CreateCriteria<Role>()
-            //                        .SetFetchMode("Users", FetchMode.Eager)
-            //                        .SetResultTransformer(new DistinctRootEntityResultTransformer());
+            IList<IRole> result = db.BsContext.Roles.Skip(page * maxRow).Take(maxRow).ToList();
 
-            //criteria.SetFirstResult(page * maxRow);
-            //criteria.SetMaxResults(maxRow);
+            int totalRow = db.BsContext.Roles.Count();            
 
-            //int totalRow = getSession().CreateCriteria<Role>().List().Count;            
+            double totalPages = Math.Round(Convert.ToDouble(Convert.ToDouble(totalRow) / Convert.ToDouble(maxRow)), MidpointRounding.AwayFromZero);
 
-            //double totalPages = Math.Round(Convert.ToDouble(Convert.ToDouble(totalRow) / Convert.ToDouble(maxRow)), MidpointRounding.AwayFromZero);
+            numberOfPages = int.Parse(totalPages.ToString());            
 
-            //numberOfPages = int.Parse(totalPages.ToString());
-
-            //return criteria.List<Role>();   
-
-            return null;
+            return result;
         }
 
-        public IList<IRole> GetByCriteriaWithPaging(int page, int maxRow, out int numberOfPages, List<CriteriaParam> Param)
+        public IList<IRole> GetByCriteriaWithPaging(int page, int maxRow, out int numberOfPages, Expression expression)
         {
             numberOfPages = 0;
 
-            //ICriteria criteria = CreateCriteriaOnly<Role>(Param)
-            //                        .SetFetchMode("Users", FetchMode.Eager)
-            //                        .SetResultTransformer(new DistinctRootEntityResultTransformer());
+            IList<IRole> result = db.BsContext.Roles.Provider.CreateQuery<IRole>(expression).Skip(page * maxRow).Take(maxRow).ToList();
 
-            //criteria.SetFirstResult(page * maxRow);
-            //criteria.SetMaxResults(maxRow);
+            int totalRow = db.BsContext.Roles.Count();
 
-            //int totalRow = getSession().CreateCriteria<Role>().List().Count;
+            double totalPages = Math.Round(Convert.ToDouble(Convert.ToDouble(totalRow) / Convert.ToDouble(maxRow)), MidpointRounding.AwayFromZero);
 
-            //double totalPages = Math.Round(Convert.ToDouble(Convert.ToDouble(totalRow) / Convert.ToDouble(maxRow)), MidpointRounding.AwayFromZero);
+            numberOfPages = int.Parse(totalPages.ToString());
 
-            //numberOfPages = int.Parse(totalPages.ToString());
-
-            //return criteria.List<Role>(); 
-
-            return null;
+            return result;
         }
 
         public void Delete(IRole entity)
         {
-            //getSession().Delete(entity);
+            db.BsContext.DeleteObject(entity);
         }
     }
 }
