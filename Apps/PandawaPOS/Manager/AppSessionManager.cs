@@ -5,7 +5,7 @@
     using System.ComponentModel;
     using System.Threading;
     using Siska.Core;
-    using Siska.Data.Dto.Pos;
+    using Siska.Data.Dto.Auth;
     using Siska.Service;
     using Siska.Wpf.Manager;
 

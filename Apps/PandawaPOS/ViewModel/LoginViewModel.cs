@@ -4,8 +4,7 @@
     using System.ComponentModel;
     using System.Windows;
     using GalaSoft.MvvmLight.Command;
-    using GalaSoft.MvvmLight.Messaging;
-    using NHibernate.Validator.Constraints;
+    using GalaSoft.MvvmLight.Messaging;    
     using Siska.Wpf.Manager;
     using Siska.Wpf.ViewModel;
     using Siska.Wpf.ViewModel.Message;
@@ -50,7 +49,7 @@
             }
         }
 
-        [NotNullNotEmpty]
+        //[NotNullNotEmpty]
         public string UserName
         {
             get { return userName; }
@@ -62,7 +61,7 @@
             }
         }
 
-        [NotNullNotEmpty]
+        //[NotNullNotEmpty]
         public string Passwordx
         {
             get { return passwordx; }
@@ -138,7 +137,7 @@
         #region Public Method
         public bool CheckValidation()
         {
-            return GetAllInvalidRules().Count == 0;
+            return true; // GetAllInvalidRules().Count == 0;
         }
         #endregion
     }

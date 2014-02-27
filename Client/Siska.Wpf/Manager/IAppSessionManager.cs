@@ -7,7 +7,7 @@
     public interface IAppSessionManager : INotifyPropertyChanged
     {
         Guid SessionId { get; set; }
-        Siska.Data.Dto.Pos.UserDto AuthUser { get; set; }
+        Siska.Data.Dto.Auth.UserDto AuthUser { get; set; }
         bool IsAuthenticated { get; set; }
         int WrongAuthCount { get; set; }
         SEnvironment.Constants.LogonStatus LogonStatus { get; set; }

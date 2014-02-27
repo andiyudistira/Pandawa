@@ -3,28 +3,23 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel;
-    using GalaSoft.MvvmLight;
-    using NHibernate.Validator.Engine;
+    using GalaSoft.MvvmLight;    
     using Siska.Wpf.Manager;
     using WPFLocalizeExtension.Extensions;
 
     public class SiskaViewModel : ViewModelBase, IDataErrorInfo, INotifyPropertyChanged
     {
-        private readonly ValidatorEngine validation;
-
         protected IAppSessionManager AppSessionManager { get; private set; }
 
         protected IDialogManager DialogManager { get; private set; }
 
         protected SiskaViewModel(IAppSessionManager sessionManager)
         {
-            validation = NHibernate.Validator.Cfg.Environment.SharedEngineProvider.GetEngine();
             AppSessionManager = sessionManager;
         }
 
         protected SiskaViewModel(IAppSessionManager sessionManager, IDialogManager dialogManager)
         {
-            validation = NHibernate.Validator.Cfg.Environment.SharedEngineProvider.GetEngine();
             AppSessionManager = sessionManager;
             DialogManager = dialogManager;
         }
@@ -36,7 +31,7 @@
                 var rules = GetInvalidRules(propertyName);
                 if (rules != null && rules.Count > 0)
                 {
-                    return rules[0].Message;
+                    return rules[0];
                 }
 
                 return null;
@@ -48,16 +43,16 @@
             get { return string.Empty; }
         }
 
-        public IList<InvalidValue> GetInvalidRules(string propertyName)
+        public IList<string> GetInvalidRules(string propertyName)
         {
             var type = this.GetType();
 
-            return validation.ValidatePropertyValue(type, propertyName, GetPropertyValue(type, propertyName));
+            return null; //validation.ValidatePropertyValue(type, propertyName, GetPropertyValue(type, propertyName));
         }
 
-        public IList<InvalidValue> GetAllInvalidRules()
+        public IList<string> GetAllInvalidRules()
         {
-            return validation.Validate(this);
+            return null; //validation.Validate(this);
         }
 
         private object GetPropertyValue(Type objectType, string properyName)
