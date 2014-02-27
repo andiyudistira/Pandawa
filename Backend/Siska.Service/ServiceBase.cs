@@ -2,8 +2,8 @@
 {
     using AutoMapper;
     using Siska.Core;
-    using Siska.Data.Dto.Pos;
-    using Siska.Data.Model.Pos;
+    using Siska.Data.Dto.Auth;
+    using Siska.Data.Model.Auth;
 
     public abstract class ServiceBase
     {

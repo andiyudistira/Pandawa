@@ -38,6 +38,9 @@
     <Reference Include="AutoMapper">
       <HintPath>..\..\lib\AutoMapper.dll</HintPath>
     </Reference>
+    <Reference Include="BrightstarDB">
+      <HintPath>..\..\lib\BrightstarDB\BrightstarDB.dll</HintPath>
+    </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\..\lib\Castle.Core.dll</HintPath>
     </Reference>
@@ -80,6 +83,10 @@
     <ProjectReference Include="..\..\Backend\Siska.Core\Siska.Core.csproj">
       <Project>{42de2e81-81f4-4792-bb4d-2924f935f659}</Project>
       <Name>Siska.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Backend\Siska.Data.Brightstar\Siska.Data.Brightstar.csproj">
+      <Project>{6546a103-ffe0-4ab6-8c1f-4e256b9293e1}</Project>
+      <Name>Siska.Data.Brightstar</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Backend\Siska.Data\Siska.Data.csproj">
       <Project>{5f8b96fa-7af8-49dc-8cb6-005c6781273a}</Project>

@@ -342,10 +342,6 @@
       <Project>{42de2e81-81f4-4792-bb4d-2924f935f659}</Project>
       <Name>Siska.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Backend\Siska.Data.NHibernate\Siska.Data.NHibernate.csproj">
-      <Project>{1069b9d4-ef88-4d2f-9724-57601b2ecbab}</Project>
-      <Name>Siska.Data.NHibernate</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Backend\Siska.Data\Siska.Data.csproj">
       <Project>{5f8b96fa-7af8-49dc-8cb6-005c6781273a}</Project>
       <Name>Siska.Data</Name>

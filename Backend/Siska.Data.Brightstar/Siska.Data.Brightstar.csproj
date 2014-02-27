@@ -61,25 +61,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BDao\IDao.cs" />
-    <Compile Include="BDao\ISupportsDelete.cs" />
-    <Compile Include="BDao\ISupportsPaging.cs" />
-    <Compile Include="BDao\ISupportsSave.cs" />
-    <Compile Include="BModel\Pos\IRole.cs" />
-    <Compile Include="BModel\Pos\IUser.cs" />
-    <Compile Include="BModel\Pos\IUserSession.cs" />
-    <Compile Include="BDao\BaseDao.cs" />
-    <Compile Include="BDao\BsContext.cs">
+    <Compile Include="Dao\IDao.cs" />
+    <Compile Include="Dao\ISupportsDelete.cs" />
+    <Compile Include="Dao\ISupportsPaging.cs" />
+    <Compile Include="Dao\ISupportsSave.cs" />
+    <Compile Include="Model\Auth\IRole.cs" />
+    <Compile Include="Model\Auth\IUser.cs" />
+    <Compile Include="Model\Auth\IUserSession.cs" />
+    <Compile Include="Dao\BaseDao.cs" />
+    <Compile Include="Dao\BsContext.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>BsContext.tt</DependentUpon>
     </Compile>
-    <Compile Include="BDao\Pos\IRoleDao.cs" />
-    <Compile Include="BDao\Pos\IUserDao.cs" />
-    <Compile Include="BDao\Pos\IUserSessionDao.cs" />
-    <Compile Include="BDao\Pos\RoleDao.cs" />
-    <Compile Include="BDao\Pos\UserDao.cs" />
-    <Compile Include="BDao\Pos\UserSessionDao.cs" />
+    <Compile Include="Dao\Auth\IRoleDao.cs" />
+    <Compile Include="Dao\Auth\IUserDao.cs" />
+    <Compile Include="Dao\Auth\IUserSessionDao.cs" />
+    <Compile Include="Dao\Auth\RoleDao.cs" />
+    <Compile Include="Dao\Auth\UserDao.cs" />
+    <Compile Include="Dao\Auth\UserSessionDao.cs" />
     <Compile Include="ISiskaDB.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SiskaDB.cs" />
@@ -95,7 +95,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <None Include="BDao\BsContext.tt">
+    <None Include="Dao\BsContext.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <LastGenOutput>BsContext.cs</LastGenOutput>
     </None>

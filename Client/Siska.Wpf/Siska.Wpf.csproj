@@ -51,21 +51,11 @@
     <Reference Include="Castle.Core">
       <HintPath>..\..\lib\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Facilities.AutoTx">
-      <HintPath>..\..\lib\Castle.Facilities.AutoTx.dll</HintPath>
-    </Reference>
     <Reference Include="Castle.Facilities.Logging">
       <HintPath>..\..\lib\Castle.Facilities.Logging.dll</HintPath>
     </Reference>
-    <Reference Include="Castle.Facilities.NHibernate">
-      <HintPath>..\..\lib\Castle.Facilities.NHibernate.dll</HintPath>
-    </Reference>
     <Reference Include="Castle.Services.Logging.Log4netIntegration">
       <HintPath>..\..\lib\Castle.Services.Logging.Log4netIntegration.dll</HintPath>
-    </Reference>
-    <Reference Include="Castle.Transactions, Version=0.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\Castle.Transactions.dll</HintPath>
     </Reference>
     <Reference Include="Castle.Windsor, Version=3.1.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -73,10 +63,6 @@
     </Reference>
     <Reference Include="FirstFloor.ModernUI">
       <HintPath>..\..\lib\FirstFloor.ModernUI.dll</HintPath>
-    </Reference>
-    <Reference Include="FluentNHibernate, Version=1.3.0.0, Culture=neutral, PublicKeyToken=8aa435e3cb308880, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\..\lib\FluentNHibernate.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight.WPF45, Version=4.1.24.16411, Culture=neutral, PublicKeyToken=eabbf6a5f5af5004, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -90,12 +76,6 @@
     </Reference>
     <Reference Include="Microsoft.Windows.Shell">
       <HintPath>..\..\lib\Microsoft.Windows.Shell.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate">
-      <HintPath>..\..\lib\NHibernate.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate.ByteCode.Castle">
-      <HintPath>..\..\lib\NHibernate.ByteCode.Castle.dll</HintPath>
     </Reference>
     <Reference Include="NHibernate.Validator">
       <HintPath>..\..\lib\NHibernate.Validator.dll</HintPath>
@@ -128,7 +108,6 @@
     <Compile Include="Manager\IDialogManager.cs" />
     <Compile Include="Manager\IMenuManager.cs" />
     <Compile Include="Manager\MenuNames.cs" />
-    <Compile Include="NHInstaller.cs" />
     <Compile Include="PasswordBoxHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModelLocator.cs">
@@ -146,7 +125,6 @@
     <Compile Include="ViewModel\SiskaViewModel.cs" />
     <Compile Include="WindsorDaoInstaller.cs" />
     <Compile Include="WindsorManagerInstaller.cs" />
-    <Compile Include="WindsorNHInstaller.cs" />
     <Compile Include="WindsorServiceInstaller.cs" />
     <Compile Include="WindsorViewsInstaller.cs" />
   </ItemGroup>
@@ -154,10 +132,6 @@
     <ProjectReference Include="..\..\Backend\Siska.Core\Siska.Core.csproj">
       <Project>{42de2e81-81f4-4792-bb4d-2924f935f659}</Project>
       <Name>Siska.Core</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Backend\Siska.Data.NHibernate\Siska.Data.NHibernate.csproj">
-      <Project>{1069b9d4-ef88-4d2f-9724-57601b2ecbab}</Project>
-      <Name>Siska.Data.NHibernate</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Backend\Siska.Data\Siska.Data.csproj">
       <Project>{5f8b96fa-7af8-49dc-8cb6-005c6781273a}</Project>

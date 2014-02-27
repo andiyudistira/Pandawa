@@ -2,7 +2,7 @@
 {
     using System;
     using Siska.Core;
-    using Siska.Data.Dao;
+    using Siska.Data.Dao.Auth;
 
     public interface ISessionService
     {

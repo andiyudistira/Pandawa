@@ -5,9 +5,10 @@
     using System.Linq;
     using AutoMapper;
     using Siska.Core;
-    using Siska.Data.Dao;
-    using Siska.Data.Dto.Pos;
-    using Siska.Data.Model.Pos;
+    using Siska.Data.Dao.Auth;
+    using Siska.Data.Dto.Auth;
+    using Siska.Data.Model.Auth;
+    using System.Linq.Expressions;
     
     public class SessionService : ServiceBase, ISessionService
     {
@@ -33,26 +34,32 @@
             param.Add(new CriteriaParam() { FieldName = ServiceConstants.PASSWORD, Operator = Operators.Equals, Value = password });
             param.Add(new CriteriaParam() { FieldName = ServiceConstants.RECORDSTATUS, Operator = Operators.Equals, Value = true });
 
-            User user = UserDao.GetByCriteria(param).FirstOrDefault();
+            Expression expr = (new List<IUser>()).Where(x =>
+                x.UserName.Equals(userName) &&
+                x.Password.Equals(password) &&
+                x.RecordStatus).AsQueryable().Expression;
+
+            var test = UserDao.GetByCriteria(expr);
+            IUser user = UserDao.GetByCriteria(expr).FirstOrDefault();
 
             if (user != null)
             {
-                UserSession userSession = new UserSession();
+                IUserSession userSession = UserSessionDao.CreateNew();
 
                 userSession.LoginDate = DateTime.Now;
                 userSession.LoginStatus = 1;
-                userSession.SessionId = Guid.NewGuid();
+                userSession.SessionId = Guid.NewGuid().ToString();
                 userSession.User = user;                
 
-                user.UserSessions.Add(userSession);
-
-                UserSessionDao.Add(userSession);
+                user.UserSessions.Add(userSession);                
 
                 response.IsSuccess = true;
 
                 UserDto userDto = Mapper.Map<UserDto>(user);
 
-                response.Data = userDto;
+                UserSessionDao.SaveChanges();
+
+                response.Data = userDto;                
             }
             else
             {
@@ -78,7 +85,12 @@
             param.Add(new CriteriaParam() { FieldName = ServiceConstants.PASSWORD, Operator = Operators.Equals, Value = password });
             param.Add(new CriteriaParam() { FieldName = ServiceConstants.RECORDSTATUS, Operator = Operators.Equals, Value = true });
 
-            User user = UserDao.GetByCriteria(param).FirstOrDefault();
+            Expression expr = (new List<IUser>()).Where(x =>
+                x.UserName.Equals(userName) &&
+                x.Password.Equals(password) &&
+                x.RecordStatus).AsQueryable().Expression;
+
+            IUser user = UserDao.GetByCriteria(expr).FirstOrDefault();
 
             if (user == null)
             {
@@ -101,14 +113,17 @@
 
             param.Add(new CriteriaParam() { FieldName = ServiceConstants.SESSIONID, Operator = Operators.Equals, Value = sessionId });
 
-            UserSession userSession = UserSessionDao.GetByCriteria(param).FirstOrDefault();
+            Expression expr = (new List<IUserSession>()).Where(x =>
+                    x.SessionId.Equals(sessionId)).AsQueryable().Expression;
+
+            IUserSession userSession = UserSessionDao.GetByCriteria(expr).FirstOrDefault();
 
             if (userSession != null)
             {
                 userSession.LogOffDate = DateTime.Now;
                 userSession.LoginStatus = 0;
 
-                UserSessionDao.Update(userSession);
+                UserSessionDao.SaveChanges();
 
                 response.IsSuccess = true;
             }
@@ -131,7 +146,10 @@
 
             param.Add(new CriteriaParam() { FieldName = ServiceConstants.LOGONSTATUS, Operator = Operators.Equals, Value = (int)SEnvironment.Constants.LogonStatus.LoggedOn });
 
-            List<UserSession> userSession = UserSessionDao.GetByCriteria(param).ToList();
+            Expression expr = (new List<UserSession>()).Where(x =>
+                    x.LoginStatus == (int)SEnvironment.Constants.LogonStatus.LoggedOn).AsQueryable().Expression;
+
+            List<IUserSession> userSession = UserSessionDao.GetByCriteria(expr).ToList();
 
             if (userSession != null && userSession.Count > 0)
             {
@@ -157,7 +175,10 @@
 
             param.Add(new CriteriaParam() { FieldName = ServiceConstants.LOGONSTATUS, Operator = Operators.Equals, Value = (int)SEnvironment.Constants.LogonStatus.LoggedOn });
 
-            List<UserSession> userSession = UserSessionDao.GetByCriteria(param).ToList();
+            Expression expr = (new List<UserSession>()).Where(x =>
+                    x.LoginStatus == (int)SEnvironment.Constants.LogonStatus.LoggedOn).AsQueryable().Expression;
+
+            List<IUserSession> userSession = UserSessionDao.GetByCriteria(expr).ToList();
 
             if (userSession != null && userSession.Count > 0)
             {

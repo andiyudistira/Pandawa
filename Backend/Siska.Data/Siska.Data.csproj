@@ -49,26 +49,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DaoInterceptor.cs" />
-    <Compile Include="Dao\Acc\IAccountDao.cs" />
-    <Compile Include="Dao\Acc\ICategoryDao.cs" />
-    <Compile Include="Dao\IDao.cs" />
-    <Compile Include="Dao\ISupportsDelete.cs" />
-    <Compile Include="Dao\ISupportsPaging.cs" />
-    <Compile Include="Dao\ISupportsSave.cs" />
-    <Compile Include="Dao\Pos\IRoleDao.cs" />
-    <Compile Include="Dao\Pos\IUserDao.cs" />
-    <Compile Include="Dao\Pos\IUserSessionDao.cs" />
-    <Compile Include="Dto\Pos\RoleDto.cs" />
-    <Compile Include="Dto\Pos\UserDto.cs" />
-    <Compile Include="Dto\Pos\UserSessionDto.cs" />
-    <Compile Include="Model\Acc\AccAccount.cs" />
-    <Compile Include="Model\Acc\AccCategory.cs" />
-    <Compile Include="Model\Acc\AccTransaction.cs" />
-    <Compile Include="Model\Acc\AccTransactionDetail.cs" />
-    <Compile Include="Model\Pos\Role.cs" />
-    <Compile Include="Model\Pos\User.cs" />
-    <Compile Include="Model\Pos\UserSession.cs" />
-    <Compile Include="Model\Pos\UsersInRole.cs" />
+    <Compile Include="Dto\Auth\RoleDto.cs" />
+    <Compile Include="Dto\Auth\UserDto.cs" />
+    <Compile Include="Dto\Auth\UserSessionDto.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />

@@ -10,9 +10,13 @@ using Castle.MicroKernel.Registration;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Moq;
 using Siska.Core;
-using Siska.Data.Dao;
-using Siska.Data.Model.Pos;
+using Siska.Data.Dao.Auth;
+using Siska.Data.Model.Auth;
 using Siska.Service;
+using System.Linq.Expressions;
+using BrightstarDB.EntityFramework;
+using Siska.Data;
+using Siska.Data.Dao;
 
 namespace POS.Service.Test
 {
@@ -67,21 +71,26 @@ namespace POS.Service.Test
 
         private void PrepareUser()
         {
-            validUser = new User();
-
+            validUser = SetupUserDaoMocking().Object.CreateNew() as User;
+            
             validUser.UserName = "andi";
             validUser.Password = "andi";
             validUser.RecordStatus = true;
             validUser.UserId = 2;
-            validUser.Roles.Add(new Role() {
-                RoleName = "admin",
-                RoleId = 1
-            });
+            //validUser.Roles.Add(new Role() {
+            //    RoleName = "admin",
+            //    RoleId = 1
+            //});
+            //validUser.UserSessions = (new List<IUserSession>()).ToArray();
+        
         }
 
-        public Mock<IUserDao> SetupUserDaoMocking()
+        public Mock<UserDao> SetupUserDaoMocking()
         {
-            var mock = new Mock<IUserDao>();
+            ISiskaDB db = new SiskaDB();
+
+            var mockUserDao = new Mock<UserDao>(new object[1] { db });
+            mockUserDao.Object.CreateNew();
 
             List<CriteriaParam> param = new List<CriteriaParam>();
 
@@ -89,19 +98,26 @@ namespace POS.Service.Test
             param.Add(new CriteriaParam() { FieldName = ServiceConstants.PASSWORD, Operator = Operators.Equals, Value = "andi" });
             param.Add(new CriteriaParam() { FieldName = ServiceConstants.RECORDSTATUS, Operator = Operators.Equals, Value = true });
 
-            List<User> returnResult = new List<User>();
+            Expression expr = (new List<IUser>()).Where(x =>
+                    x.UserName.Equals("andi") &&
+                    x.Password.Equals("andi") &&
+                    x.RecordStatus).AsQueryable().Expression;
+
+            List<IUser> returnResult = new List<IUser>();
             returnResult.Add(validUser);
 
-            mock.Setup(foo => foo.GetByCriteria(param)).Returns<List<User>>(x => x = returnResult);
+            mockUserDao.Setup(foo => foo.GetByCriteria(It.IsAny<Expression>())).Returns(returnResult);
 
-            return mock;
+            return mockUserDao;
         }
 
-        public Mock<IUserSessionDao> SetupUserSessionDaoMock()
+        public Mock<UserSessionDao> SetupUserSessionDaoMock()
         {
-            var mock = new Mock<IUserSessionDao>();
+            ISiskaDB db = new SiskaDB();
 
-            return mock;
+            var mockUserSessionDao = new Mock<UserSessionDao>(new object[1] { db });
+
+            return mockUserSessionDao;
         }
 
         [TestMethod]
