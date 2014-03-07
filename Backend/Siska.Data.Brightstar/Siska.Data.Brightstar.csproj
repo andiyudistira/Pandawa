@@ -61,6 +61,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Dao\Blog\CategoryDao.cs" />
+    <Compile Include="Dao\Blog\ICategoryDao.cs" />
+    <Compile Include="Dao\Blog\IPostDao.cs" />
+    <Compile Include="Dao\Blog\ITagDao.cs" />
+    <Compile Include="Dao\Blog\PostDao.cs" />
+    <Compile Include="Dao\Blog\TagDao.cs" />
     <Compile Include="Dao\IDao.cs" />
     <Compile Include="Dao\ISupportsDelete.cs" />
     <Compile Include="Dao\ISupportsPaging.cs" />
@@ -81,6 +87,9 @@
     <Compile Include="Dao\Auth\UserDao.cs" />
     <Compile Include="Dao\Auth\UserSessionDao.cs" />
     <Compile Include="ISiskaDB.cs" />
+    <Compile Include="Model\Blog\ICategory.cs" />
+    <Compile Include="Model\Blog\IPost.cs" />
+    <Compile Include="Model\Blog\ITag.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SiskaDB.cs" />
   </ItemGroup>

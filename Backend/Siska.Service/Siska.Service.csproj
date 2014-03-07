@@ -51,7 +51,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Blog\BlogService.cs" />
     <Compile Include="ISessionService.cs" />
+    <Compile Include="Blog\IBlogService.cs" />
     <Compile Include="ServiceBase.cs" />
     <Compile Include="ServiceInterceptor.cs" />
     <Compile Include="SessionService.cs" />
@@ -71,9 +73,7 @@
       <Name>Siska.Data</Name>
     </ProjectReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Pos\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

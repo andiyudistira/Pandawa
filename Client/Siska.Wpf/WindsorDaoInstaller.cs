@@ -1,17 +1,13 @@
 ﻿namespace Siska.Wpf
 {
-    using System;
-    using System.Collections.Generic;
-    using System.IO;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
     using Castle.Core;
+    using Castle.Facilities.Logging;
     using Castle.MicroKernel.Registration;
     using Castle.MicroKernel.SubSystems.Configuration;
     using Castle.Windsor;
     using Siska.Data;
-    using Castle.Facilities.Logging;
+    using System;
+    using System.IO;
 
     public class WindsorDaoInstaller : IWindsorInstaller
     {

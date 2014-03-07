@@ -30,6 +30,12 @@ namespace Siska.Data.Dao
     		TypeMappings.AddImplMapping<Siska.Data.Model.Auth.IUser, Siska.Data.Model.Auth.User>();
     		provider.AddMappingsForType(TypeMappings, typeof(Siska.Data.Model.Auth.IUserSession));
     		TypeMappings.AddImplMapping<Siska.Data.Model.Auth.IUserSession, Siska.Data.Model.Auth.UserSession>();
+    		provider.AddMappingsForType(TypeMappings, typeof(Siska.Data.Model.Blog.ICategory));
+    		TypeMappings.AddImplMapping<Siska.Data.Model.Blog.ICategory, Siska.Data.Model.Blog.Category>();
+    		provider.AddMappingsForType(TypeMappings, typeof(Siska.Data.Model.Blog.IPost));
+    		TypeMappings.AddImplMapping<Siska.Data.Model.Blog.IPost, Siska.Data.Model.Blog.Post>();
+    		provider.AddMappingsForType(TypeMappings, typeof(Siska.Data.Model.Blog.ITag));
+    		TypeMappings.AddImplMapping<Siska.Data.Model.Blog.ITag, Siska.Data.Model.Blog.Tag>();
     	}
     	
     	/// <summary>
@@ -98,6 +104,9 @@ namespace Siska.Data.Dao
     		Roles = 	new BrightstarEntitySet<Siska.Data.Model.Auth.IRole>(this);
     		Users = 	new BrightstarEntitySet<Siska.Data.Model.Auth.IUser>(this);
     		UserSessions = 	new BrightstarEntitySet<Siska.Data.Model.Auth.IUserSession>(this);
+    		Categories = 	new BrightstarEntitySet<Siska.Data.Model.Blog.ICategory>(this);
+    		Posts = 	new BrightstarEntitySet<Siska.Data.Model.Blog.IPost>(this);
+    		Tags = 	new BrightstarEntitySet<Siska.Data.Model.Blog.ITag>(this);
     	}
     	
     	public IEntitySet<Siska.Data.Model.Auth.IRole> Roles
@@ -111,6 +120,21 @@ namespace Siska.Data.Dao
     	}
     	
     	public IEntitySet<Siska.Data.Model.Auth.IUserSession> UserSessions
+    	{
+    		get; private set;
+    	}
+    	
+    	public IEntitySet<Siska.Data.Model.Blog.ICategory> Categories
+    	{
+    		get; private set;
+    	}
+    	
+    	public IEntitySet<Siska.Data.Model.Blog.IPost> Posts
+    	{
+    		get; private set;
+    	}
+    	
+    	public IEntitySet<Siska.Data.Model.Blog.ITag> Tags
     	{
     		get; private set;
     	}
@@ -267,6 +291,147 @@ namespace Siska.Data.Model.Auth
             		get { return GetRelatedProperty<System.Int32>("UserSessionId"); }
             		set { SetRelatedProperty("UserSessionId", value); }
     	}
+    	#endregion
+    }
+}
+namespace Siska.Data.Model.Blog 
+{
+    
+    public partial class Category : BrightstarEntityObject, ICategory 
+    {
+    	public Category(BrightstarEntityContext context, IDataObject dataObject) : base(context, dataObject) { }
+    	public Category() : base() { }
+    	public System.String Id { get {return GetIdentity(); } set { SetIdentity(value); } }
+    	#region Implementation of Siska.Data.Model.Blog.ICategory
+    
+    	public System.String Name
+    	{
+            		get { return GetRelatedProperty<System.String>("Name"); }
+            		set { SetRelatedProperty("Name", value); }
+    	}
+    
+    	public System.String UrlSlug
+    	{
+            		get { return GetRelatedProperty<System.String>("UrlSlug"); }
+            		set { SetRelatedProperty("UrlSlug", value); }
+    	}
+    
+    	public System.String Description
+    	{
+            		get { return GetRelatedProperty<System.String>("Description"); }
+            		set { SetRelatedProperty("Description", value); }
+    	}
+    	public System.Collections.Generic.ICollection<Siska.Data.Model.Blog.IPost> Posts
+    	{
+    		get { return GetRelatedObjects<Siska.Data.Model.Blog.IPost>("Posts"); }
+    		set { SetRelatedObjects("Posts", value); }
+    								}
+    	#endregion
+    }
+}
+namespace Siska.Data.Model.Blog 
+{
+    
+    public partial class Post : BrightstarEntityObject, IPost 
+    {
+    	public Post(BrightstarEntityContext context, IDataObject dataObject) : base(context, dataObject) { }
+    	public Post() : base() { }
+    	public System.String Id { get {return GetIdentity(); } set { SetIdentity(value); } }
+    	#region Implementation of Siska.Data.Model.Blog.IPost
+    
+    	public System.String Title
+    	{
+            		get { return GetRelatedProperty<System.String>("Title"); }
+            		set { SetRelatedProperty("Title", value); }
+    	}
+    
+    	public System.String ShortDescription
+    	{
+            		get { return GetRelatedProperty<System.String>("ShortDescription"); }
+            		set { SetRelatedProperty("ShortDescription", value); }
+    	}
+    
+    	public System.String Description
+    	{
+            		get { return GetRelatedProperty<System.String>("Description"); }
+            		set { SetRelatedProperty("Description", value); }
+    	}
+    
+    	public System.String Meta
+    	{
+            		get { return GetRelatedProperty<System.String>("Meta"); }
+            		set { SetRelatedProperty("Meta", value); }
+    	}
+    
+    	public System.String UrlSlug
+    	{
+            		get { return GetRelatedProperty<System.String>("UrlSlug"); }
+            		set { SetRelatedProperty("UrlSlug", value); }
+    	}
+    
+    	public System.Boolean Published
+    	{
+            		get { return GetRelatedProperty<System.Boolean>("Published"); }
+            		set { SetRelatedProperty("Published", value); }
+    	}
+    
+    	public System.DateTime PostedOn
+    	{
+            		get { return GetRelatedProperty<System.DateTime>("PostedOn"); }
+            		set { SetRelatedProperty("PostedOn", value); }
+    	}
+    
+    	public System.Nullable<System.DateTime> Modified
+    	{
+            		get { return GetRelatedProperty<System.Nullable<System.DateTime>>("Modified"); }
+            		set { SetRelatedProperty("Modified", value); }
+    	}
+    
+    	public Siska.Data.Model.Blog.ICategory Category
+    	{
+            get { return GetRelatedObject<Siska.Data.Model.Blog.ICategory>("Category"); }
+            set { SetRelatedObject<Siska.Data.Model.Blog.ICategory>("Category", value); }
+    	}
+    	public System.Collections.Generic.ICollection<Siska.Data.Model.Blog.ITag> Tags
+    	{
+    		get { return GetRelatedObjects<Siska.Data.Model.Blog.ITag>("Tags"); }
+    		set { SetRelatedObjects("Tags", value); }
+    								}
+    	#endregion
+    }
+}
+namespace Siska.Data.Model.Blog 
+{
+    
+    public partial class Tag : BrightstarEntityObject, ITag 
+    {
+    	public Tag(BrightstarEntityContext context, IDataObject dataObject) : base(context, dataObject) { }
+    	public Tag() : base() { }
+    	public System.String Id { get {return GetIdentity(); } set { SetIdentity(value); } }
+    	#region Implementation of Siska.Data.Model.Blog.ITag
+    
+    	public System.String Name
+    	{
+            		get { return GetRelatedProperty<System.String>("Name"); }
+            		set { SetRelatedProperty("Name", value); }
+    	}
+    
+    	public System.String UrlSlug
+    	{
+            		get { return GetRelatedProperty<System.String>("UrlSlug"); }
+            		set { SetRelatedProperty("UrlSlug", value); }
+    	}
+    
+    	public System.String Description
+    	{
+            		get { return GetRelatedProperty<System.String>("Description"); }
+            		set { SetRelatedProperty("Description", value); }
+    	}
+    	public System.Collections.Generic.ICollection<Siska.Data.Model.Blog.IPost> Posts
+    	{
+    		get { return GetRelatedObjects<Siska.Data.Model.Blog.IPost>("Posts"); }
+    		set { SetRelatedObjects("Posts", value); }
+    								}
     	#endregion
     }
 }

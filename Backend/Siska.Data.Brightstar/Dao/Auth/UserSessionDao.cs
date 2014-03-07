@@ -100,5 +100,10 @@
         {
             db.BsContext.DeleteObject(entity);
         }
+
+        public virtual int TotalRecords()
+        {
+            return db.BsContext.UserSessions.Count();
+        }
     }
 }

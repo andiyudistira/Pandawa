@@ -68,17 +68,11 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\lib\MvvmLight\GalaSoft.MvvmLight.WPF45.dll</HintPath>
     </Reference>
-    <Reference Include="Iesi.Collections">
-      <HintPath>..\..\lib\Iesi.Collections.dll</HintPath>
-    </Reference>
     <Reference Include="log4net">
       <HintPath>..\..\lib\log4net.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Windows.Shell">
       <HintPath>..\..\lib\Microsoft.Windows.Shell.dll</HintPath>
-    </Reference>
-    <Reference Include="NHibernate.Validator">
-      <HintPath>..\..\lib\NHibernate.Validator.dll</HintPath>
     </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />

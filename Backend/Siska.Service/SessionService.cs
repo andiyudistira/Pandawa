@@ -12,13 +12,13 @@
     
     public class SessionService : ServiceBase, ISessionService
     {
-        public IUserDao UserDao { get; set; }
+        private IUserDao userDao;
+        private IUserSessionDao userSessionDao;
 
-        public IUserSessionDao UserSessionDao { get; set; }
-
-        public SessionService(IUserDao userDao)
+        public SessionService(IUserDao userDao, IUserSessionDao userSessionDao)
         {
-            UserDao = userDao;
+            this.userDao = userDao;
+            this.userSessionDao = userSessionDao;
         }
 
         public ServiceResponse StartSession(ServiceRequest serviceParams)
@@ -39,12 +39,12 @@
                 x.Password.Equals(password) &&
                 x.RecordStatus).AsQueryable().Expression;
 
-            var test = UserDao.GetByCriteria(expr);
-            IUser user = UserDao.GetByCriteria(expr).FirstOrDefault();
+            var test = userDao.GetByCriteria(expr);
+            IUser user = userDao.GetByCriteria(expr).FirstOrDefault();
 
             if (user != null)
             {
-                IUserSession userSession = UserSessionDao.CreateNew();
+                IUserSession userSession = userSessionDao.CreateNew();
 
                 userSession.LoginDate = DateTime.Now;
                 userSession.LoginStatus = 1;
@@ -57,7 +57,7 @@
 
                 UserDto userDto = Mapper.Map<UserDto>(user);
 
-                UserSessionDao.SaveChanges();
+                userSessionDao.SaveChanges();
 
                 response.Data = userDto;                
             }
@@ -90,7 +90,7 @@
                 x.Password.Equals(password) &&
                 x.RecordStatus).AsQueryable().Expression;
 
-            IUser user = UserDao.GetByCriteria(expr).FirstOrDefault();
+            IUser user = userDao.GetByCriteria(expr).FirstOrDefault();
 
             if (user == null)
             {
@@ -116,14 +116,14 @@
             Expression expr = (new List<IUserSession>()).Where(x =>
                     x.SessionId.Equals(sessionId)).AsQueryable().Expression;
 
-            IUserSession userSession = UserSessionDao.GetByCriteria(expr).FirstOrDefault();
+            IUserSession userSession = userSessionDao.GetByCriteria(expr).FirstOrDefault();
 
             if (userSession != null)
             {
                 userSession.LogOffDate = DateTime.Now;
                 userSession.LoginStatus = 0;
 
-                UserSessionDao.SaveChanges();
+                userSessionDao.SaveChanges();
 
                 response.IsSuccess = true;
             }
@@ -149,7 +149,7 @@
             Expression expr = (new List<UserSession>()).Where(x =>
                     x.LoginStatus == (int)SEnvironment.Constants.LogonStatus.LoggedOn).AsQueryable().Expression;
 
-            List<IUserSession> userSession = UserSessionDao.GetByCriteria(expr).ToList();
+            List<IUserSession> userSession = userSessionDao.GetByCriteria(expr).ToList();
 
             if (userSession != null && userSession.Count > 0)
             {
@@ -178,7 +178,7 @@
             Expression expr = (new List<UserSession>()).Where(x =>
                     x.LoginStatus == (int)SEnvironment.Constants.LogonStatus.LoggedOn).AsQueryable().Expression;
 
-            List<IUserSession> userSession = UserSessionDao.GetByCriteria(expr).ToList();
+            List<IUserSession> userSession = userSessionDao.GetByCriteria(expr).ToList();
 
             if (userSession != null && userSession.Count > 0)
             {

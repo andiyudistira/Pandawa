@@ -30,7 +30,7 @@ namespace Brightstar.Data.Test.BrightstarHelper
 
             AssemblyFilter filter = new AssemblyFilter(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, ""));
 
-            if (System.Configuration.ConfigurationManager.AppSettings["DaoFramework"].ToString().Equals("Siska.Data.Brightstar"))
+            if (System.Configuration.ConfigurationManager.AppSettings["DaoAssemblyName"].ToString().Equals("Siska.Data.Brightstar"))
             {
                 container.Register(Classes.FromAssemblyInDirectory(filter)
                           .Where(c => c.IsClass &&

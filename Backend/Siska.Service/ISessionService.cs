@@ -11,8 +11,5 @@
         ServiceResponse UnlockSession(ServiceRequest serviceParams);
         ServiceResponse LogonStatus();
         ServiceResponse LastLoggedOnUser();
-
-        IUserDao UserDao { get; set; }
-        IUserSessionDao UserSessionDao { get; set; }
     }
 }

@@ -38,5 +38,11 @@
         /// <param name="criteria">criteria for selection in string</param>
         /// <returns>Matching entities</returns>
         IList<TEntity> GetByCriteriaWithPaging(int page, int maxRow, out int numberOfPages, Expression Param);
+
+        /// <summary>
+        /// Get total records of the entities
+        /// </summary>
+        /// <returns>Number of total records</returns>
+        int TotalRecords();
     }
 }
